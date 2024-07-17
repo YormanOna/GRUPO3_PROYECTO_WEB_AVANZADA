@@ -7,6 +7,10 @@ class Coctail(models.Model):
     cantidad = models.IntegerField()
     garnishes = models.CharField(max_length=100)
     mixers = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.nombre
+    
 class Paquetes(models.Model):
     nombrePaquete = models.CharField(max_length=150)
     numeroCocteles = models.IntegerField()
@@ -14,6 +18,10 @@ class Paquetes(models.Model):
     insumos = models.CharField(max_length=200)
     numeroPersonas = models.IntegerField()
     descripcion = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.nombrePaquete
+    
 class Clientes(models.Model):
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)
@@ -22,8 +30,15 @@ class Clientes(models.Model):
     domicilio = models.CharField(max_length=200)
     telefono = models.IntegerField()
     email = models.EmailField()
+
+    def __str__(self):
+        return self.nombre
+    
 class CuentaCliente(models.Model):
     nombreUsuario = models.CharField(max_length=100)
     password = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.nombreUsuario
 
     
