@@ -7,6 +7,7 @@ class Coctail(models.Model):
     cantidad = models.IntegerField()
     garnishes = models.CharField(max_length=100)
     mixers = models.CharField(max_length=100)
+    imagen = models.ImageField(upload_to='coctails', null=True, blank=True)
 
     def __str__(self):
         return self.nombre
@@ -29,7 +30,7 @@ class Clientes(models.Model):
     cedula = models.IntegerField()
     domicilio = models.CharField(max_length=200)
     telefono = models.IntegerField()
-    email = models.EmailField()
+    email = models.CharField(max_length=100)
 
     def __str__(self):
         return self.nombre
