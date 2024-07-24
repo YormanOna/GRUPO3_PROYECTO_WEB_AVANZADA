@@ -2,6 +2,8 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { validarUsuario } from '../api/projectapi';
 import { useNavigate } from 'react-router-dom';
+import butterup from 'butteruptoasts';
+import '../../styles/butterup-2.0.0/butterup.css';
 
 export function Login() {
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -21,18 +23,52 @@ export function Login() {
 
         if (user) {
           console.log('Usuario autenticado:', user);
-          navigate('/'); 
+          butterup.toast({
+            title: '🎉 ¡Hurra!',
+            message: 'Su ingreso fue exitoso.',
+            location: 'top-right',
+            icon: false,
+            dismissable: true,
+            type: 'success',
+          });
+
+          // Esperar unos segundos antes de redirigir
+          setTimeout(() => {
+            navigate('/');
+          }, 1000); // 2000 ms = 2 segundos
+
         } else {
           console.error('Error en la autenticación');
-          alert('Usuario o contraseña incorrectos');
+          butterup.toast({
+            title: '¡Oh!',
+            message: 'Usuario o contraseña incorrectos.',
+            location: 'top-right',
+            icon: false,
+            dismissable: true,
+            type: 'error',
+          });
         }
       } else {
         console.error('Error en la autenticación');
-        alert('Usuario o contraseña incorrectos');
+        butterup.toast({
+          title: '¡Oh!',
+          message: 'Usuario o contraseña incorrectos.',
+          location: 'top-right',
+          icon: false,
+          dismissable: true,
+          type: 'error',
+        });
       }
     } catch (error) {
       console.error('Error en la autenticación', error);
-      alert('Error en la autenticación');
+      butterup.toast({
+        title: '¡Error!',
+        message: 'Ocurrió un error en la autenticación.',
+        location: 'top-right',
+        icon: false,
+        dismissable: true,
+        type: 'error',
+      });
     }
   });
 
@@ -41,18 +77,18 @@ export function Login() {
       <form onSubmit={onSubmit}>
         <label>
           Usuario:
-          <input type="text" name="nombreUsuario" 
-            {...register('nombreUsuario', { required: true })}
+          <input type="text" 
+            {...register('nombreUsuario', { required: 'El usuario es requerido' })}
           />
-          {errors.nombreUsuario && <p>El usuario es requerido</p>}
+          {errors.nombreUsuario && <p>{errors.nombreUsuario.message}</p>}
         </label>
         <br />
         <label>
           Contraseña:
-          <input type="password" name="password" 
-            {...register('password', { required: true })}
+          <input type="password" 
+            {...register('password', { required: 'La contraseña es requerida' })}
           />
-          {errors.password && <p>La contraseña es requerida</p>}
+          {errors.password && <p>{errors.password.message}</p>}
         </label>
         <br />
         <button type="submit">Ingresar</button>
