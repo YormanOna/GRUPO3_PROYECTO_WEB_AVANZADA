@@ -10,6 +10,7 @@ export function ListaProductos() {
             setProductos(respuesta.data);
         }
         cargarProductos();
+        
     }, []);
 
     return (

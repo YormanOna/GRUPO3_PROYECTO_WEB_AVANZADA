@@ -5,7 +5,7 @@ const API_URL = axios.create({
 });
 
 export const obtenerProductos = () => {
-    return  API_URL.get('coctails/')
+    return  API_URL.get('cocktails/')
 }
 export const validarUsuario = (data) => {
     return API_URL.get('cuentacliente/', data)
