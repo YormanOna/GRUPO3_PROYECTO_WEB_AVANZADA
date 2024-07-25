@@ -8,6 +8,7 @@ import Cocteles1 from '../images/Cocteles1.jpg';
 import Cocteles2 from '../images/Cocteles2.jpg';
 import Cocteles3 from '../images/Cocteles3.jpg';
 import Cocteles4 from '../images/Cocteles4.jpg';
+import Cocteles5 from '../images/Cocteles5.jpg';
 import logo from '../images/logo.png';
 
 export function Home() {
@@ -42,11 +43,21 @@ export function Home() {
             <div>
               <img src={Cocteles4} alt="Imagen 3" />
             </div>
+            <div>
+              <img src={Cocteles5} alt="Imagen 4" />
+            </div>
           </Carousel>
         </div>
         <div className="info">
-          <h2>Información</h2>
-          <p>Texto informativo sobre las imágenes o cualquier otro contenido relevante.</p>
+        <h2>¿Quiénes somos?</h2>
+        <p>Banana's Cocktails es un servicio de barra móvil y coctelería clásica con más de 6 años de experiencia. Ofrecemos un enfoque innovador con iluminación LED para todo tipo de eventos.</p>
+
+        <h3>Servicio de Bartender</h3>
+        <p>Ofrecemos bartenders calificados que preparan y sirven una variedad de cócteles, con o sin alcohol. Proporcionamos insumos necesarios como licor, fruta, hielo y cristalería, con transporte dentro del Distrito Metropolitano de Quito y valles cercanos. Trabajamos con los mejores licores y ofrecemos un servicio ilimitado de horas para garantizar un evento inolvidable.</p>
+
+        <h3>Servicio de Catering</h3>
+        <p>Además de nuestros servicios de coctelería, ofrecemos un servicio de catering que incluye mini hamburguesas, mini pinchos, mini empanadas, shawarmas, hot dogs y chili dogs. </p>
+        
         </div>
       </div>
       <footer className='footer'>

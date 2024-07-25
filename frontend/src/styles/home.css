@@ -23,9 +23,9 @@
 }
 
 .subheading {
-  font-size: 17px; /* Tamaño más pequeño para el subtítulo */
-  color: #d1d1d1fa; /* Color gris claro para el subtítulo */
-  margin: 0; /* Elimina el margen para que esté más cerca del h1 */
+  font-size: 17px; 
+  color: #d1d1d1fa; 
+  margin: 0; 
   font-family: 'Lucida Bright', Arial, monospace;
   margin-left: 80px;
   margin-top: -10px;
@@ -56,12 +56,12 @@
   display: flex;
   justify-content: space-around;
   width: 97%;
-  background-image: url('../images/Cocteles1.jpg'); /* Añade la imagen de fondo */
-  background-size: cover; /* Asegúrate de que la imagen cubra todo el contenedor */
-  background-position: top; /* Centra la imagen */
+  background-image: url('../images/Cocteles1.jpg'); 
+  background-size: cover; 
+  background-position: top; 
   padding: 1rem;
   border-radius: 10px;
-  position: relative; /* Necesario para posicionar el fondo blanco con opacidad */
+  position: relative; 
 }
 
 .content::before {
@@ -71,9 +71,9 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(255, 255, 255, 0.074); /* Fondo blanco con opacidad */
-  backdrop-filter: blur(7px); /* Aplica el filtro de desenfoque */
-  z-index: 0; /* Coloca el pseudo-elemento detrás del contenido */
+  background: rgba(255, 255, 255, 0.074); 
+  backdrop-filter: blur(7px);
+  z-index: 0; 
 }
 
 .carousel{
@@ -83,21 +83,37 @@
 }
 
 .info {
-  position: relative; /* Asegúrate de que el contenido esté encima del pseudo-elemento */
-  z-index: 1; /* Coloca el contenido encima del pseudo-elemento */
+  position: relative; 
+  z-index: 1;
   width: 40%;
   padding: 1rem;
-  background: rgba(249, 248, 245, 0.536); /* Fondo blanco con opacidad para mejor legibilidad */
+  background: rgba(249, 248, 245, 0.536); 
   border-radius: 10px;
 }
 
 .info h2 {
   margin-bottom: 1rem;
+  font-family: 'Baskerville Old Face', Arial, monospace;
+  text-align: center;
+  font-size: 1.6rem;
+}
+
+.info h3{
+  font-family: 'Baskerville Old Face', Arial, monospace;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  margin-left: 20px;
+  font-size: 1.35rem;
 }
 
 .info p {
-  font-size: 1rem;
+  font-size: 1.15rem;
   line-height: 1.5;
+  margin-left: 20px;
+  margin-right: 20px;
+  text-align: justify;
+  font-family: 'Baskerville Old Face', Arial, monospace;
+  
 }
 
 footer{
