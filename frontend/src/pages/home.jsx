@@ -1,20 +1,24 @@
 import React from 'react';
-import { ListaProductos } from "../components/product_list";
 import { Link } from 'react-router-dom';
 import { Carousel } from 'react-responsive-carousel';
-import 'react-responsive-carousel/lib/styles/carousel.min.css'; // Estilos del carrusel
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import "../styles/home.css";
 
 import Cocteles1 from '../images/Cocteles1.jpg';
 import Cocteles2 from '../images/Cocteles2.jpg';
 import Cocteles3 from '../images/Cocteles3.jpg';
 import Cocteles4 from '../images/Cocteles4.jpg';
+import logo from '../images/logo.png';
 
 export function Home() {
   return (
     <div className="home-container">
       <header className="header">
-        <h1>Banana's Cocktails</h1>
+        <img src={logo} alt="logo 1" />
+        <div>
+          <h1>Banana's Cocktails</h1>
+          <p className="subheading">Servicio de Bartender y Catering</p>
+        </div>
         <Link to="/registro" className="register-button">Iniciar sesión</Link>
       </header>
       <div className="content">
