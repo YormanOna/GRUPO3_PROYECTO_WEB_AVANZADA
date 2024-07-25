@@ -20,7 +20,7 @@ export function Home() {
           <h1>Banana's Cocktails</h1>
           <p className="subheading">Servicio de Bartender y Catering</p>
         </div>
-        <Link to="/registro" className="register-button">Iniciar sesión</Link>
+        <Link to="/login" className="register-button">Iniciar sesión</Link>
       </header>
       <div className="content">
         <div className="carousel">

@@ -4,6 +4,7 @@ import { validarUsuario } from '../api/projectapi';
 import { useNavigate } from 'react-router-dom';
 import butterup from 'butteruptoasts';
 import '../styles/butterup-2.0.0/butterup.css';
+import '../styles/login.css';
 
 export function Login() {
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -73,8 +74,8 @@ export function Login() {
   });
 
   return (
-    <div>
-      <form onSubmit={onSubmit}>
+    <div className="login-container">
+      <form className="login-form" onSubmit={onSubmit}>
         <label>
           Usuario:
           <input type="text" 
@@ -82,7 +83,6 @@ export function Login() {
           />
           {errors.nombreUsuario && <p>{errors.nombreUsuario.message}</p>}
         </label>
-        <br />
         <label>
           Contraseña:
           <input type="password" 
@@ -90,7 +90,6 @@ export function Login() {
           />
           {errors.password && <p>{errors.password.message}</p>}
         </label>
-        <br />
         <button type="submit">Ingresar</button>
       </form>
     </div>

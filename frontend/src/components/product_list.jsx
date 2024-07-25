@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { obtenerProductos } from "../api/projectapi";
+import { obtenerCocteles } from "../api/projectapi";
 
 export function ListaProductos() {
     const [productos, setProductos] = useState([]);
 
     useEffect(() => {
         async function cargarProductos() {
-            const respuesta = await obtenerProductos();
+            const respuesta = await obtenerCocteles();
             setProductos(respuesta.data);
         }
         cargarProductos();
