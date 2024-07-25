@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { validarUsuario } from '../api/projectapi';
 import { useNavigate } from 'react-router-dom';
 import butterup from 'butteruptoasts';
-import '../../styles/butterup-2.0.0/butterup.css';
+import '../styles/butterup-2.0.0/butterup.css';
 
 export function Login() {
   const { register, handleSubmit, formState: { errors } } = useForm();
