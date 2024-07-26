@@ -4,6 +4,7 @@ import { registrarUsuario } from '../../api/projectapi';
 import { useNavigate } from 'react-router-dom';
 import butterup from 'butteruptoasts';
 import '../../styles/butterup-2.0.0/butterup.css';
+import '../../styles/registro.css';
 
 
 export function Registro() {
@@ -44,8 +45,9 @@ export function Registro() {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit(onSubmit)}>
+    <div className="registro-container">
+      <form onSubmit={handleSubmit(onSubmit)} className="registro-form">
+      <h1 className='titulo'>Registro de usuario</h1>
         <label>
           Nombre:
           <input type="text" {...register('nombre', {/* required: true */})} />
@@ -88,7 +90,7 @@ export function Registro() {
           {/*errors.email && <p>El correo es requerido</p>*/}
         </label>
         <br />
-        <button type="submit">Registrarse</button>
+        <button type="submit" className="registro-button">Registrarse</button>
       </form>
     </div>
   );
