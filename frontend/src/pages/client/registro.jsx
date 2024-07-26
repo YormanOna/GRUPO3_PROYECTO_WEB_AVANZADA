@@ -24,11 +24,11 @@ export function Registro() {
         navigate('/login');
       } else {
         console.error("Error en el registro");
-        alert("Error en el registro");
+        
       }
     } catch (error) {
       console.error("Error en el registro", error.response ? error.response.data : error.message);
-      alert("Error en el registro");
+      
     }
   };
 
@@ -37,44 +37,44 @@ export function Registro() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <label>
           Nombre:
-          <input type="text" {...register('nombre', { required: true })} />
-          {errors.nombre && <p>El nombre es requerido</p>}
+          <input type="text" {...register('nombre', {/* required: true */})} />
+          {/*errors.nombre && <p>El nombre es requerido</p>*/}
         </label>
         <br />
         <label>
           Apellido:
-          <input type="text" {...register('apellido', { required: true })} />
-          {errors.apellido && <p>El apellido es requerido</p>}
+          <input type="text" {...register('apellido', { /*required: true */})} />
+          {/*errors.apellido && <p>El apellido es requerido</p>*/}
         </label>
         <br />
         <label>
           Fecha de nacimiento:
-          <input type="date" {...register('fecha_nacimiento', { required: true })} />
-          {errors.fecha_nacimiento && <p>La fecha de nacimiento es requerida</p>}
+          <input type="date" {...register('fecha_nacimiento', { /*required: true*/ })} />
+          {/*errors.fecha_nacimiento && <p>La fecha de nacimiento es requerida</p>*/}
         </label>
         <br />
         <label>
           Cédula de Ciudadanía:
-          <input type="number" {...register('cedula', { required: true })} />
-          {errors.cedula && <p>La cédula es requerida</p>}
+          <input type="number" {...register('cedula', { /*required: true */})} />
+          {/*errors.cedula && <p>La cédula es requerida</p>*/}
         </label>
         <br />
         <label>
           Domicilio:
-          <input type="text" {...register('domicilio', { required: true })} />
-          {errors.domicilio && <p>El domicilio es requerido</p>}
+          <input type="text" {...register('domicilio', {/* required: true*/ })} />
+          {/*errors.domicilio && <p>El domicilio es requerido</p>*/}
         </label>
         <br />
         <label>
           Teléfono:
-          <input type="number" {...register('telefono', { required: true })} />
-          {errors.telefono && <p>El teléfono es requerido</p>}
+          <input type="number" {...register('telefono', { /*required: true*/ })} />
+          {/*errors.telefono && <p>El teléfono es requerido</p>*/}
         </label>
         <br />
         <label>
           Correo:
-          <input type="email" {...register('email', { required: true })} />
-          {errors.email && <p>El correo es requerido</p>}
+          <input type="email" {...register('email', { /*required: true */})} />
+          {/*errors.email && <p>El correo es requerido</p>*/}
         </label>
         <br />
         <button type="submit">Registrarse</button>
