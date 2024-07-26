@@ -2,6 +2,9 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { registrarUsuario } from '../../api/projectapi';
 import { useNavigate } from 'react-router-dom';
+import butterup from 'butteruptoasts';
+import '../../styles/butterup-2.0.0/butterup.css';
+
 
 export function Registro() {
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -22,6 +25,14 @@ export function Registro() {
       console.log("Usuario registrado", response);
       if (response.status === 201) {
         navigate('/login');
+        butterup.toast({
+          title: '🎉 ¡Hurra!',
+          message: 'Datos ingresado.',
+          location: 'top-right',
+          icon: false,
+          dismissable: true,
+          type: 'success',
+        });
       } else {
         console.error("Error en el registro");
         
