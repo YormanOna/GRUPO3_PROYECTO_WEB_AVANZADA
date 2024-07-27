@@ -11,6 +11,28 @@ export function Registro() {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const navigate = useNavigate();
 
+  const today = new Date();
+  const maxDate = today.toISOString().split('T')[0];
+  const minDate = '1900-01-01';
+
+  const validateFechaNacimiento = (value) => {
+    const fechaNacimiento = new Date(value);
+    const fechaMinima = new Date(minDate);
+    const fechaActual = new Date();
+    const edad = fechaActual.getFullYear() - fechaNacimiento.getFullYear();
+    const mesDiferencia = fechaActual.getMonth() - fechaNacimiento.getMonth();
+
+    if (fechaNacimiento < fechaMinima) {
+      return 'La fecha de nacimiento no puede ser anterior al año 1900';
+    }
+
+    if (edad < 18 || (edad === 18 && mesDiferencia < 0) || (edad === 18 && mesDiferencia === 0 && fechaActual.getDate() < fechaNacimiento.getDate())) {
+      return 'Debe tener al menos 18 años';
+    }
+
+    return true;
+  };
+
   const onSubmit = async (data) => {
     console.log("Datos enviados:", data);
     
@@ -49,45 +71,83 @@ export function Registro() {
       <form onSubmit={handleSubmit(onSubmit)} className="registro-form">
       <h1 className='titulo'>Registro de usuario</h1>
         <label>
-          Nombre:
-          <input type="text" {...register('nombre', {/* required: true */})} />
-          {/*errors.nombre && <p>El nombre es requerido</p>*/}
+        Nombre:
+        <input 
+          type="text" 
+          {...register('nombre', {
+            required: 'El nombre es requerido',
+            pattern: {
+              value: /^[A-Za-z]+$/,
+              message: "Solo se permiten letras"
+            }
+          })} 
+        />
+        {errors.nombre && <p>{errors.nombre.message}</p>}
         </label>
-        <br />
+
         <label>
-          Apellido:
-          <input type="text" {...register('apellido', { /*required: true */})} />
-          {/*errors.apellido && <p>El apellido es requerido</p>*/}
+        Apellido:
+        <input 
+          type="text" 
+          {...register('apellido', {
+            required: 'El apellido es requerido',
+            pattern: {
+              value: /^[A-Za-z]+$/,
+              message: "Solo se permiten letras"
+            }
+          })} 
+        />
+        {errors.apellido && <p>{errors.apellido.message}</p>}
         </label>
-        <br />
+        
         <label>
           Fecha de nacimiento:
-          <input type="date" {...register('fecha_nacimiento', { /*required: true*/ })} />
-          {/*errors.fecha_nacimiento && <p>La fecha de nacimiento es requerida</p>*/}
+          <input 
+            type="date" 
+            {...register('fecha_nacimiento', {
+              required: 'La fecha de nacimiento es requerida',
+              validate: validateFechaNacimiento
+            })} 
+            min={minDate}
+            max={maxDate}
+          />
+          {errors.fecha_nacimiento && <p>{errors.fecha_nacimiento.message}</p>}
         </label>
-        <br />
+        
         <label>
           Cédula de Ciudadanía:
-          <input type="number" {...register('cedula', { /*required: true */})} />
-          {/*errors.cedula && <p>La cédula es requerida</p>*/}
+          <input 
+            type="number" 
+            {...register('cedula_ciudadania', {
+              required: 'El número de cédula es requerido'
+            })} 
+            min={0}
+          />
+          {errors.cedula_ciudadania && <p>{errors.cedula_ciudadania.message}</p>}
         </label>
-        <br />
+        
         <label>
           Domicilio:
-          <input type="text" {...register('domicilio', {/* required: true*/ })} />
-          {/*errors.domicilio && <p>El domicilio es requerido</p>*/}
+          <input type="text" {...register('domicilio', {required: true})} />
+          {errors.domicilio && <p>El domicilio es requerido</p>}
         </label>
-        <br />
+        
         <label>
           Teléfono:
-          <input type="number" {...register('telefono', { /*required: true*/ })} />
-          {/*errors.telefono && <p>El teléfono es requerido</p>*/}
+          <input 
+            type="number" 
+            {...register('telefono', {
+              required: 'El número de teléfono es requerido'
+            })} 
+            min={0}
+          />
+          {errors.telefono && <p>{errors.telefono.message}</p>}
         </label>
-        <br />
+        
         <label>
           Correo:
-          <input type="email" {...register('email', { /*required: true */})} />
-          {/*errors.email && <p>El correo es requerido</p>*/}
+          <input type="email" {...register('email', { required: true })} />
+          {errors.email && <p>El correo es requerido</p>}
         </label>
         <br />
         <button type="submit" className="registro-button">Registrarse</button>

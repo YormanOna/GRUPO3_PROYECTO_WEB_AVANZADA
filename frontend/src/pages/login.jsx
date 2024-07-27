@@ -90,6 +90,10 @@ export function Login() {
           />
           {errors.password && <p>{errors.password.message}</p>}
         </label>
+        <label>
+          ¿No tienes cuenta?
+          <a href="/registro"> Regístrate</a>
+        </label>
         <button type="submit">Ingresar</button>
       </form>
     </div>
