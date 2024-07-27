@@ -4,8 +4,7 @@ import { registrarUsuario } from '../../api/projectapi';
 import { useNavigate } from 'react-router-dom';
 import butterup from 'butteruptoasts';
 import '../../styles/butterup-2.0.0/butterup.css';
-import '../../styles/registro.css';
-
+import '../../styles/login.css';
 
 export function Registro() {
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -37,10 +36,13 @@ export function Registro() {
     console.log("Datos enviados:", data);
     
     const processedData = {
-      ...data,
-      cedula: parseInt(data.cedula, 10),
+      nombre: data.nombre,
+      apellido: data.apellido,
+      fecha_nacimiento: new Date(data.fecha_nacimiento).toISOString().split('T')[0],
+      cedula: parseInt(data.cedula_ciudadania, 10),
+      domicilio: data.domicilio,
       telefono: parseInt(data.telefono, 10),
-      fecha_nacimiento: new Date(data.fecha_nacimiento).toISOString().split('T')[0] 
+      email: data.email
     };
 
     try {
@@ -50,60 +52,80 @@ export function Registro() {
         navigate('/login');
         butterup.toast({
           title: '🎉 ¡Hurra!',
-          message: 'Datos ingresado.',
+          message: 'Datos ingresados correctamente.',
           location: 'top-right',
           icon: false,
           dismissable: true,
           type: 'success',
         });
-      } else {
-        console.error("Error en el registro");
         
+        setTimeout(() => {
+          navigate('/login');
+          window.location.reload();
+        }, 1000); 
+      } else {
+        console.error("Error en el registro", response);
+        butterup.toast({
+          title: '🚫 Error',
+          message: 'Hubo un problema con el registro.',
+          location: 'top-right',
+          icon: false,
+          dismissable: true,
+          type: 'error',
+        });
       }
     } catch (error) {
       console.error("Error en el registro", error.response ? error.response.data : error.message);
-      
+      butterup.toast({
+        title: '🚫 Error',
+        message: 'Hubo un problema con el registro.',
+        location: 'top-right',
+        icon: false,
+        dismissable: true,
+        type: 'error',
+      });
     }
   };
 
   return (
-    <div className="registro-container">
-      <form onSubmit={handleSubmit(onSubmit)} className="registro-form">
-      <h1 className='titulo'>Registro de usuario</h1>
-        <label>
-        Nombre:
-        <input 
-          type="text" 
-          {...register('nombre', {
-            required: 'El nombre es requerido',
-            pattern: {
-              value: /^[A-Za-z]+$/,
-              message: "Solo se permiten letras"
-            }
-          })} 
-        />
-        {errors.nombre && <p>{errors.nombre.message}</p>}
-        </label>
-
-        <label>
-        Apellido:
-        <input 
-          type="text" 
-          {...register('apellido', {
-            required: 'El apellido es requerido',
-            pattern: {
-              value: /^[A-Za-z]+$/,
-              message: "Solo se permiten letras"
-            }
-          })} 
-        />
-        {errors.apellido && <p>{errors.apellido.message}</p>}
-        </label>
-        
-        <label>
-          Fecha de nacimiento:
+    <form onSubmit={handleSubmit(onSubmit)} className='sign-up-form'>
+      <h2 className='titleNew'>Registro</h2>
+      <div className='inputslist'>
+        <div className='input-field'>
+          <i className="fa-solid fa-user"></i>
+          <input 
+            type="text"
+            placeholder='Nombre' 
+            {...register('nombre', {
+              required: 'El nombre es requerido',
+              pattern: {
+                value: /^[A-Za-z]+$/,
+                message: "Solo se permiten letras"
+              }
+            })} 
+          />
+          {errors.nombre && <p className='errors'>{errors.nombre.message}</p>}
+        </div>
+        <div className='input-field'>
+          <i className="fa-regular fa-user"></i>
+          <input 
+            type="text" 
+            placeholder='Apellido' 
+            {...register('apellido', {
+              required: 'El apellido es requerido',
+              pattern: {
+                value: /^[A-Za-z]+$/,
+                message: "Solo se permiten letras"
+              }
+            })} 
+          />
+          {errors.apellido && <p className='errors'>{errors.apellido.message}</p>}
+        </div>
+        <div className='input-field'>
+          <i className="fa-solid fa-calendar-days"></i>
           <input 
             type="date" 
+            placeholder='Fecha de nacimiento' 
             {...register('fecha_nacimiento', {
               required: 'La fecha de nacimiento es requerida',
               validate: validateFechaNacimiento
@@ -111,47 +133,51 @@ export function Registro() {
             min={minDate}
             max={maxDate}
           />
-          {errors.fecha_nacimiento && <p>{errors.fecha_nacimiento.message}</p>}
-        </label>
-        
-        <label>
-          Cédula de Ciudadanía:
+          {errors.fecha_nacimiento && <p className='errors'>{errors.fecha_nacimiento.message}</p>}
+        </div>
+        <div className='input-field'>
+          <i className="fa-solid fa-address-card"></i>
           <input 
             type="number" 
+            placeholder='Cedula de Identidad'
             {...register('cedula_ciudadania', {
               required: 'El número de cédula es requerido'
             })} 
             min={0}
           />
-          {errors.cedula_ciudadania && <p>{errors.cedula_ciudadania.message}</p>}
-        </label>
-        
-        <label>
-          Domicilio:
-          <input type="text" {...register('domicilio', {required: true})} />
-          {errors.domicilio && <p>El domicilio es requerido</p>}
-        </label>
-        
-        <label>
-          Teléfono:
+          {errors.cedula_ciudadania && <p className='errors'>{errors.cedula_ciudadania.message}</p>}
+        </div>
+        <div className='input-field'>
+          <i className="fa-solid fa-address-book"></i>
+          <input type="text" 
+            placeholder='Domicilio'
+            {...register('domicilio', { required: true })} 
+          />
+          {errors.domicilio && <p className='errors'>El domicilio es requerido</p>}
+        </div>
+        <div className='input-field'>
+          <i className="fa-solid fa-phone-volume"></i>
           <input 
             type="number" 
+            placeholder='Teléfono'
             {...register('telefono', {
               required: 'El número de teléfono es requerido'
             })} 
             min={0}
           />
-          {errors.telefono && <p>{errors.telefono.message}</p>}
-        </label>
-        
-        <label>
-          Correo:
-          <input type="email" {...register('email', { required: true })} />
-          {errors.email && <p>El correo es requerido</p>}
-        </label>
-        <br />
-        <button type="submit" className="registro-button">Registrarse</button>
-      </form>
-    </div>
+          {errors.telefono && <p className='errors'>{errors.telefono.message}</p>}
+        </div>
+        <div className='input-field'>
+          <i className="fa-solid fa-envelope"></i>
+          <input 
+            type="email" 
+            placeholder='Correo'
+            {...register('email', { required: true })} 
+          />
+          {errors.email && <p className='errors'>El correo es requerido</p>}
+        </div>
+      </div>
+      <input type='submit' className='btn solid' />
+    </form>
   );
 }
