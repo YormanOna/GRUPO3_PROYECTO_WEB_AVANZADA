@@ -79,7 +79,7 @@
 .carousel{
   width: 40%;
   border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(245, 213, 187, 0.7);
+  box-shadow: 0 2px 4px rgba(245, 213, 187, 0.69);
 }
 
 .info {
@@ -113,12 +113,12 @@
   margin-right: 20px;
   text-align: justify;
   font-family: 'Baskerville Old Face', Arial, monospace;
-  
+  color: #000000;
 }
 
 footer{
   background-color: #223C6D; 
-  color: white;
+  color: #fff;
   text-align: center;
   padding: 1.5rem;
   font-size: 120%;
@@ -126,4 +126,8 @@ footer{
   bottom: 0;
   left: 0;
   box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+}
+
+footer p{
+  color: #fff;
 }
