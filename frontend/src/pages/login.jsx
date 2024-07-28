@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { validarUsuario } from '../api/projectapi';
 import { useNavigate } from 'react-router-dom';
-import {Registro} from './client/registro';
+import { Registro } from './client/registro';
 import butterup from 'butteruptoasts';
 import '../styles/butterup-2.0.0/butterup.css';
 import '../styles/login.css';
@@ -33,6 +33,10 @@ export function Login() {
             dismissable: true,
             type: 'success',
           });
+
+          // Guardar el estado de autenticación
+          localStorage.setItem('isAuthenticated', true);
+          localStorage.setItem('user', JSON.stringify(user));
 
           setTimeout(() => {
             if (data.nombreUsuario === 'MIGUEL' && data.password === '4321') {
@@ -67,7 +71,7 @@ export function Login() {
               });
               navigate('/admin');
             } else {
-              navigate('/');
+              navigate('/home');
             }
           }, 1000);
         } else {
@@ -132,7 +136,7 @@ export function Login() {
         <div className='forms-contanier'>
           <div className='signin-signup'>
             <form className='sign-in-form' onSubmit={onSubmit}>
-              <h2 className='titleNew'>Sig in</h2>
+              <h2 className='titleNew'>Sign in</h2>
               <div className='input-field'>
                 <i className="fa-solid fa-user"></i>
                 <input type="text" 
