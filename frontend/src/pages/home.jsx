@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import "../styles/home.css";
+import {Conctactos} from '../components/contactc';
 
 import Cocteles1 from '../images/Cocteles1.jpg';
 import Cocteles2 from '../images/Cocteles2.jpg';
@@ -60,6 +61,7 @@ export function Home() {
         
         </div>
       </div>
+      <Conctactos />
       <footer className='footer'>
         <p>&copy; 2024 Todos los derechos reservados.</p>
       </footer>

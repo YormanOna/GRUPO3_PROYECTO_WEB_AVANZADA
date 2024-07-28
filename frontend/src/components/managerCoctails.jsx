@@ -40,7 +40,9 @@ export function CoctelManager() {
     formData.append('cantidad', data.cantidad);
     formData.append('garnishes', data.garnishes);
     formData.append('mixers', data.mixers);
-    formData.append('imagen', data.imagen[0]); 
+    if (data.imagen.length > 0) {
+      formData.append('imagen', data.imagen[0]); 
+    }
 
     try {
       if (isEditing) {

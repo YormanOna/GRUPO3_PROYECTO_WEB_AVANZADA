@@ -138,3 +138,11 @@ MEDIA_URL = "/media-files/"
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
 }
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'onayorman@gmail.com'  
+EMAIL_HOST_PASSWORD = 'lgbn dxvh fppv gfqt'  

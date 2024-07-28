@@ -16,7 +16,6 @@ export function Login() {
   const onSubmit = handleSubmit(async (data) => {
     try {
       const res = await validarUsuario(data);
-      console.log(res);  // Imprime la respuesta completa de la API
 
       if (res.status === 200) {
         const users = res.data;
@@ -26,9 +25,8 @@ export function Login() {
         );
 
         if (user) {
-          console.log('Usuario autenticado:', user);
           butterup.toast({
-            title: '🎉 ¡Hurra!',
+            title: `¡Hola, ${data.nombreUsuario}!`,
             message: 'Su ingreso fue exitoso.',
             location: 'top-right',
             icon: false,
@@ -36,13 +34,33 @@ export function Login() {
             type: 'success',
           });
 
-          // Esperar unos segundos antes de redirigir
           setTimeout(() => {
-            navigate('/');
-          }, 1000); // 2000 ms = 2 segundos
-
+            if (data.nombreUsuario === 'MIGUEL' && data.password === '4321') {
+              butterup.toast({
+                title: `¡Hola, ${data.nombreUsuario}!`,
+                message: 'Bienvenido al panel de administración.',
+                location: 'top-right',
+                icon: false,
+                dismissable: true,
+                type: 'success',
+              });
+              navigate('/admin');
+              
+            } else if (data.nombreUsuario === 'admin2' && data.password === 'adminpassword2') {
+              butterup.toast({
+                title: `¡Hola, ${data.nombreUsuario}!`,
+                message: 'Bienvenido al panel de administración.',
+                location: 'top-right',
+                icon: false,
+                dismissable: true,
+                type: 'success',
+              });
+              navigate('/admin');
+            } else {
+              navigate('/');
+            }
+          }, 1000);
         } else {
-          console.error('Error en la autenticación');
           butterup.toast({
             title: '¡Oh!',
             message: 'Usuario o contraseña incorrectos.',
@@ -53,7 +71,6 @@ export function Login() {
           });
         }
       } else {
-        console.error('Error en la autenticación');
         butterup.toast({
           title: '¡Oh!',
           message: 'Usuario o contraseña incorrectos.',
@@ -64,7 +81,6 @@ export function Login() {
         });
       }
     } catch (error) {
-      console.error('Error en la autenticación', error);
       butterup.toast({
         title: '¡Error!',
         message: 'Ocurrió un error en la autenticación.',

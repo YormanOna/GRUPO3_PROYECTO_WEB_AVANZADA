@@ -28,8 +28,8 @@ export const obtenerCoctel = (id) => {
 }
 
 export const actualizarCoctel = (id, data) => {
-    return API_URL.put(`coctails/${id}`, data)
-}
+    return API_URL.put(`coctails/${id}/`, data);
+};
 export const eliminarCoctel = (id) => {
     return API_URL.delete(`coctails/${id}`)
 }
@@ -44,8 +44,8 @@ export const obtenerPaquete = (id) => {
     return API_URL.get(`paquetes/${id}`)
 }
 export const actualizarPaquete = (id, data) => {
-    return API_URL.put(`paquetes/${id}`, data)
-}
+    return API_URL.put(`paquetes/${id}/`, data);
+};
 export const eliminarPaquete = (id) => {
     return API_URL.delete(`paquetes/${id}`)
 }

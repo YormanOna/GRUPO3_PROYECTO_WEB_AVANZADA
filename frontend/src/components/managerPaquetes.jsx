@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
 import butterup from 'butteruptoasts';
 import "../styles/butterup-2.0.0/butterup.css";
-import "../styles/paquete-manager.css"; // Llama al archivo CSS aquí
+import "../styles/paquete-manager.css"; 
 
 import {
   obtenerPaquetes,
@@ -15,7 +14,6 @@ import {
 
 export function PaqueteManager() {
   const { register, handleSubmit, setValue, formState: { errors } } = useForm();
-  const navigate = useNavigate();
   const [paquetes, setPaquetes] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [currentId, setCurrentId] = useState(null);
@@ -114,7 +112,7 @@ export function PaqueteManager() {
         title: '¡Oh!',
         message: 'Error al eliminar el paquete. Intentelo de nuevo',
         location: 'top-right',
-        icon: false,
+        icon: true,
         dismissable: true,
         type: 'error',
       });
