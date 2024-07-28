@@ -133,7 +133,7 @@ export function PaqueteManager() {
   };
 
   return (
-    <div className="container">
+    <div className="containerADmi">
       <h1>{isEditing ? 'Editar Paquete' : 'Registrar Paquete'}</h1>
       <form onSubmit={onSubmit}>
         <label>Nombre del Paquete</label>

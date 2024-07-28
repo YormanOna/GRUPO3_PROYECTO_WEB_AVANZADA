@@ -133,7 +133,7 @@ export function CoctelManager() {
   };
 
   return (
-    <div className="container">
+    <div className="containerADmi">
       <h1>{isEditing ? 'Editar Coctel' : 'Registrar Coctel'}</h1>
       <form onSubmit={onSubmit} encType="multipart/form-data">
         <label>Nombre del Coctel</label>
