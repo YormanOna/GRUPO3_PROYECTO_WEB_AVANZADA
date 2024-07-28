@@ -46,7 +46,17 @@ export function Login() {
               });
               navigate('/admin');
               
-            } else if (data.nombreUsuario === 'admin2' && data.password === 'adminpassword2') {
+            } else if (data.nombreUsuario === 'MARIA' && data.password === '12345') {
+              butterup.toast({
+                title: `¡Hola, ${data.nombreUsuario}!`,
+                message: 'Bienvenido al panel de administración.',
+                location: 'top-right',
+                icon: false,
+                dismissable: true,
+                type: 'success',
+              });
+              navigate('/admin');
+            } else if (data.nombreUsuario === 'JUAN' && data.password === '12') {
               butterup.toast({
                 title: `¡Hola, ${data.nombreUsuario}!`,
                 message: 'Bienvenido al panel de administración.',
