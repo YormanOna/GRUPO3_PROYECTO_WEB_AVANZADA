@@ -42,11 +42,13 @@ export function Registro() {
       cedula: parseInt(data.cedula_ciudadania, 10),
       domicilio: data.domicilio,
       telefono: parseInt(data.telefono, 10),
-      email: data.email
+      email: data.email,
+      user: data.user,
+      password: data.password
     };
 
     const cuentaData = {
-      nombreUsuario: data.nombreUsuario,
+      nombreUsuario: data.user, // Asegúrate de usar el campo correcto
       password: data.password
     };
 
@@ -57,8 +59,7 @@ export function Registro() {
       const responseCuenta = await registrarCuenta(cuentaData);
       console.log("Cuenta registrada", responseCuenta);
 
-      if (response.status === 201) {
-        navigate('/login');
+      if (response.status === 201 && responseCuenta.status === 201) {
         butterup.toast({
           title: '🎉 ¡Hurra!',
           message: 'Datos ingresados correctamente.',
@@ -67,13 +68,13 @@ export function Registro() {
           dismissable: true,
           type: 'success',
         });
-        
+
         setTimeout(() => {
           navigate('/login');
           window.location.reload();
         }, 1000); 
       } else {
-        console.error("Error en el registro", response);
+        console.error("Error en el registro", response, responseCuenta);
         butterup.toast({
           title: '🚫 Error',
           message: 'Hubo un problema con el registro.',
@@ -190,9 +191,9 @@ export function Registro() {
           <input 
             type="text" 
             placeholder='Usuario' 
-            {...register('nombreUsuario', { required: 'El usuario es requerido' })} 
+            {...register('user', { required: 'El usuario es requerido' })} 
           />
-          {errors.nombreUsuario && <p className='errors'>{errors.nombreUsuario.message}</p>}
+          {errors.user && <p className='errors'>{errors.user.message}</p>}
         </div>
         <div className='input-field'>
           <i className="fa-solid fa-lock"></i>
