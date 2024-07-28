@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { registrarUsuario } from '../../api/projectapi';
+import { registrarUsuario, registrarCuenta } from '../../api/projectapi';
 import { useNavigate } from 'react-router-dom';
 import butterup from 'butteruptoasts';
 import '../../styles/butterup-2.0.0/butterup.css';
@@ -45,9 +45,18 @@ export function Registro() {
       email: data.email
     };
 
+    const cuentaData = {
+      nombreUsuario: data.nombreUsuario,
+      password: data.password
+    };
+
     try {
       const response = await registrarUsuario(processedData);
       console.log("Usuario registrado", response);
+      
+      const responseCuenta = await registrarCuenta(cuentaData);
+      console.log("Cuenta registrada", responseCuenta);
+
       if (response.status === 201) {
         navigate('/login');
         butterup.toast({
@@ -175,6 +184,24 @@ export function Registro() {
             {...register('email', { required: true })} 
           />
           {errors.email && <p className='errors'>El correo es requerido</p>}
+        </div>
+        <div className='input-field'>
+          <i className="fa-solid fa-user"></i>
+          <input 
+            type="text" 
+            placeholder='Usuario' 
+            {...register('nombreUsuario', { required: 'El usuario es requerido' })} 
+          />
+          {errors.nombreUsuario && <p className='errors'>{errors.nombreUsuario.message}</p>}
+        </div>
+        <div className='input-field'>
+          <i className="fa-solid fa-lock"></i>
+          <input 
+            type="password" 
+            placeholder='Password' 
+            {...register('password', { required: 'La contraseña es requerida' })} 
+          />
+          {errors.password && <p className='errors'>{errors.password.message}</p>}
         </div>
       </div>
       <input type='submit' className='btn solid' />

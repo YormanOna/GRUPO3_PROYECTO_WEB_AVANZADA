@@ -14,6 +14,10 @@ export const validarUsuario = (data) => {
 export const registrarUsuario = (data) => {
     return API_URL.post('clientes/', data)
 }
+export const registrarCuenta = (data) => {
+    const { id, ...accountData } = data;
+    return API_URL.post('cuentacliente/', accountData);
+};
 
 export const registrarCoctel = (data) => {
     return API_URL.post('coctails/', data)
