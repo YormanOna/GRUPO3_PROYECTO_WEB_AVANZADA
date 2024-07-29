@@ -71,7 +71,7 @@ export function Login() {
               });
               navigate('/admin');
             } else {
-              navigate('/home');
+              navigate('/menu');
             }
           }, 1000);
         } else {

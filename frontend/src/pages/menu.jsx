@@ -1,6 +1,9 @@
 import React, { useRef } from 'react';
 import HTMLFlipBook from 'react-pageflip';
 import '../styles/menu.css';
+import { ListaProductos } from '../components/product_list';
+import {Header} from '../components/header';
+import {Footer} from '../components/footer';
 
 import Page1 from '../images/Menu/1.png';
 import Page2 from '../images/Menu/2.png';
@@ -21,9 +24,11 @@ export function Menu() {
     const prevPage = () => {
         book.current.pageFlip().flipPrev();
     };
+
     return (
         <div className="menu-container">
-
+            <Header />
+            <h1> Servicio de Bartender</h1>
             <button className="nav-button left" onClick={prevPage}>&lt;</button>
             <HTMLFlipBook width={500} height={700} className="flip-book" ref={book} showCover={true}>
                 <div className="single-page">
@@ -68,6 +73,7 @@ export function Menu() {
                 </div>
             </HTMLFlipBook>
             <button className="nav-button right" onClick={nextPage}>&gt;</button>
+            <Footer />
         </div>
     );
 }

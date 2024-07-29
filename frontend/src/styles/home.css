@@ -10,30 +10,33 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .header h1 {
   color: white;
-  margin-left: 60px;
   font-family: 'Lucida Bright', Arial, monospace;
   font-size: 220%;
-  margin-top: -0.2%;
+  margin: 0 -11rem 0 0;
 }
 
-.subheading {
+.header p {
   font-size: 17px; 
   color: #d1d1d1fa; 
-  margin: 0; 
   font-family: 'Lucida Bright', Arial, monospace;
-  margin-left: 80px;
-  margin-top: -10px;
+  margin-left: 14rem;
+  margin-bottom: -0.5rem;
 }
 
 .header img {
   width: 8%;
   margin-right: -60%;
+}
+
+.button-container {
+  display: flex;
+  gap: 50px; 
+  margin-right: 50px;
 }
 
 .register-button {
@@ -44,7 +47,6 @@
   border-radius: 4px;
   text-decoration: none;
   font-size: 1.2rem;
-  margin-right: 40px;
   font-family: 'Baskerville Old Face', Arial, monospace;
 }
 
@@ -76,7 +78,7 @@
   z-index: 0; 
 }
 
-.carousel{
+.carousel {
   width: 40%;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(245, 213, 187, 0.69);
@@ -98,7 +100,7 @@
   font-size: 1.6rem;
 }
 
-.info h3{
+.info h3 {
   font-family: 'Baskerville Old Face', Arial, monospace;
   margin-top: 1.5rem;
   margin-bottom: 1rem;
@@ -116,7 +118,7 @@
   color: #000000;
 }
 
-footer{
+.footer {
   background-color: #223C6D; 
   color: #fff;
   text-align: center;
@@ -128,6 +130,6 @@ footer{
   box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
 }
 
-footer p{
+.footer p {
   color: #fff;
 }

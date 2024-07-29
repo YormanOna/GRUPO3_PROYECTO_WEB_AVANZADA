@@ -1,9 +1,9 @@
 .menu-container {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    margin-top: 20px;
     position: relative;
+    margin-top: 20px;
 }
 
 .flip-book {
@@ -11,6 +11,7 @@
     align-items: center;
     justify-content: center;
     position: relative;
+    z-index: 1;
 }
 
 .page, .single-page {
@@ -48,7 +49,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
 }
 
 .menu-image {
@@ -66,7 +66,12 @@
     border: none;
     padding: 10px;
     cursor: pointer;
-    z-index: 10;
+    z-index: 2;
+}
+
+.contenedor{
+    background-color: #223C6D;
+    padding: 2rem;
 }
 
 .nav-button.left {
@@ -82,6 +87,7 @@
 .nav-button:hover {
     background-color: rgba(0, 0, 0, 0.8);
 }
+
 .header {
     width: 97%;
     background-color: #223C6D; 
@@ -90,12 +96,12 @@
     align-items: center;
     padding: 1rem;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  }
-  
-  .header h1 {
+}
+
+.header h1 {
     color: white;
     margin-left: 60px;
     font-family: 'Lucida Bright', Arial, monospace;
     font-size: 220%;
     margin-top: -0.2%;
-  }
+}

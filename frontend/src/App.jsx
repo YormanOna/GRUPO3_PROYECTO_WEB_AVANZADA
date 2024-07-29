@@ -5,6 +5,7 @@ import {Registro} from './pages/client/registro';
 import {AdminHome} from './pages/admin/adminHome';
 import {Index} from './pages/index';
 import {Menu} from './pages/menu';
+import {Contact} from './pages/contact';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/admin" element={<AdminHome />} />
         <Route path="/home" element={<Index />} />
         <Route path="/menu" element={<Menu/>} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
     </BrowserRouter>
   );
