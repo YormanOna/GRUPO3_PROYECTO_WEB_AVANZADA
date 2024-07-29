@@ -13,14 +13,14 @@
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.header h1 {
+.header .titulo1 {
   color: white;
   font-family: 'Lucida Bright', Arial, monospace;
   font-size: 220%;
-  margin: 0 -11rem 0 0;
+  margin: 0 -18rem 0 0;
 }
 
-.header p {
+.header .subtitle {
   font-size: 17px; 
   color: #d1d1d1fa; 
   font-family: 'Lucida Bright', Arial, monospace;

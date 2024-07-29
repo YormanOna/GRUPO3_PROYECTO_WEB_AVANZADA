@@ -18,8 +18,8 @@ export function Home() {
         
         <img src={logo} alt="logo 1" />
         <div>
-          <h1>Banana's Cocktails</h1>
-          <p>Servicio de Bartender y Catering</p>
+          <h1 className='titulo1'>Banana's Cocktails</h1>
+          <p className='subtitle'>Servicio de Bartender y Catering</p>
         </div>
         <div className="button-container">
           <Link to="/contact" className="register-button">Contáctanos</Link>
