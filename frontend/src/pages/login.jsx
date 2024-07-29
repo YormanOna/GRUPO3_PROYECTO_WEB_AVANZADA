@@ -6,8 +6,8 @@ import { Registro } from './client/registro';
 import butterup from 'butteruptoasts';
 import '../styles/butterup-2.0.0/butterup.css';
 import '../styles/login.css';
-import InicioImg from '../images/INICIO.png';
-import RegistroImg from '../images/registro.png';
+import InicioImg from '../images/index.gif';
+import RegistroImg from '../images/sandwich-.gif';
 
 export function Login() {
   const { register, handleSubmit, formState: { errors } } = useForm();

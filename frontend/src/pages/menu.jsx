@@ -1,9 +1,9 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import HTMLFlipBook from 'react-pageflip';
 import '../styles/menu.css';
-import { ListaProductos } from '../components/product_list';
-import {Header} from '../components/header';
-import {Footer} from '../components/footer';
+import { Header } from '../components/header';
+import { Footer } from '../components/footer';
+import { Catering } from '../components/catering';
 
 import Page1 from '../images/Menu/1.png';
 import Page2 from '../images/Menu/2.png';
@@ -16,6 +16,8 @@ import Fin from '../images/Menu/Fin.png';
 
 export function Menu() {
     const book = useRef();
+    const [showBartender, setShowBartender] = useState(true); // Estado para mostrar el menú de bartender
+    const [showCatering, setShowCatering] = useState(false); // Estado para mostrar el menú de catering
 
     const nextPage = () => {
         book.current.pageFlip().flipNext();
@@ -25,54 +27,82 @@ export function Menu() {
         book.current.pageFlip().flipPrev();
     };
 
+    const handleBartenderClick = () => {
+        setShowBartender(true);
+        setShowCatering(false);
+    };
+
+    const handleCateringClick = () => {
+        setShowBartender(false);
+        setShowCatering(true);
+    };
+
     return (
         <div className="menu-container">
             <Header />
-            <h1> Servicio de Bartender</h1>
-            <button className="nav-button left" onClick={prevPage}>&lt;</button>
-            <HTMLFlipBook width={500} height={700} className="flip-book" ref={book} showCover={true}>
-                <div className="single-page">
-                    <div className="page-content">
-                        <img src={Inicio} alt="Inicio" className="menu-image" />
-                    </div>
+            <div className="button-container">
+                <button className={`menu-button ${showBartender ? 'active' : ''}`} onClick={handleBartenderClick}>
+                    Servicio de Bartender
+                </button>
+                <button className={`menu-button ${showCatering ? 'active' : ''}`} onClick={handleCateringClick}>
+                    Servicio de Catering
+                </button>
+            </div>
+
+            {showBartender && (
+                <div className="bartender-section">
+                    <button className="nav-button left" onClick={prevPage}>&lt;</button>
+                    <HTMLFlipBook width={500} height={700} className="flip-book" ref={book} showCover={true}>
+                        <div className="single-page">
+                            <div className="page-content">
+                                <img src={Inicio} alt="Inicio" className="menu-image" />
+                            </div>
+                        </div>
+                        <div className="page">
+                            <div className="page-content">
+                                <img src={Page1} alt="Coctel 1" className="menu-image" />
+                            </div>
+                        </div>
+                        <div className="page">
+                            <div className="page-content">
+                                <img src={Page2} alt="Coctel 2" className="menu-image" />
+                            </div>
+                        </div>
+                        <div className="page">
+                            <div className="page-content">
+                                <img src={Page3} alt="Coctel 3" className="menu-image" />
+                            </div>
+                        </div>
+                        <div className="page">
+                            <div className="page-content">
+                                <img src={Page4} alt="Coctel 4" className="menu-image" />
+                            </div>
+                        </div>
+                        <div className="page">
+                            <div className="page-content">
+                                <img src={Page5} alt="Coctel 5" className="menu-image" />
+                            </div>
+                        </div>
+                        <div className="page">
+                            <div className="page-content">
+                                <img src={Page6} alt="Coctel 6" className="menu-image" />
+                            </div>
+                        </div>
+                        <div className="single-page2">
+                            <div className="page-content">
+                                <img src={Fin} alt="Fin" className="menu-image" />
+                            </div>
+                        </div>
+                    </HTMLFlipBook>
+                    <button className="nav-button right" onClick={nextPage}>&gt;</button>
                 </div>
-                <div className="page">
-                    <div className="page-content">
-                        <img src={Page1} alt="Coctel 1" className="menu-image" />
-                    </div>
+            )}
+
+            {showCatering && (
+                <div className="catering-section">
+                    <Catering />
                 </div>
-                <div className="page">
-                    <div className="page-content">
-                        <img src={Page2} alt="Coctel 2" className="menu-image" />
-                    </div>
-                </div>
-                <div className="page">
-                    <div className="page-content">
-                        <img src={Page3} alt="Coctel 3" className="menu-image" />
-                    </div>
-                </div>
-                <div className="page">
-                    <div className="page-content">
-                        <img src={Page4} alt="Coctel 4" className="menu-image" />
-                    </div>
-                </div>
-                <div className="page">
-                    <div className="page-content">
-                        <img src={Page5} alt="Coctel 5" className="menu-image" />
-                    </div>
-                </div>
-                <div className="page">
-                    <div className="page-content">
-                        <img src={Page6} alt="Coctel 6" className="menu-image" />
-                    </div>
-                </div>
-                <div className="single-page2">
-                    <div className="page-content">
-                        <img src={Fin} alt="Fin" className="menu-image" />
-                    </div>
-                </div>
-            </HTMLFlipBook>
-            <button className="nav-button right" onClick={nextPage}>&gt;</button>
+            )}
             <Footer />
         </div>
     );

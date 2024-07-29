@@ -1,7 +1,7 @@
 import React from "react";
 import { CoctelManager } from "../../components/managerCoctails";
 import { PaqueteManager } from "../../components/managerPaquetes";
-import '../../styles/admin.css';
+import '../../styles/admin.css'; 
 
 export function AdminHome() {
   const [activeTab, setActiveTab] = React.useState("cocktails");

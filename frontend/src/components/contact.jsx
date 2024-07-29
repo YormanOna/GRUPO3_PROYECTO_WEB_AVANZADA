@@ -50,8 +50,9 @@ export function Conctactos() {
   };
 
   return (
+    <div className='body'>
     <div className="contact-form-container">
-      <h2>Contactanos</h2>
+      <h2>Contáctanos</h2>
       <input
         type="email"
         placeholder="Ingrese su correo"
@@ -80,6 +81,7 @@ export function Conctactos() {
       <br />
       <button onClick={sendMail} className="contact-form-button">Enviar Mensaje</button>
       {status && <p className="contact-form-status">{status}</p>}
+    </div>
     </div>
   );
 }
