@@ -9,7 +9,6 @@ export function AdminHome() {
   return (
     <div className="admin-container">
       <h1>Panel de Administración</h1>
-      <p>En esta página se mostrarán las opciones de administración.</p>
       <div className="tab-buttons">
         <button
           className={`tab-button ${activeTab === "cocktails" ? "active" : ""}`}
