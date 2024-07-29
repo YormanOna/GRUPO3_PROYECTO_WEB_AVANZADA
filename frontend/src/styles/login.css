@@ -79,10 +79,12 @@ form.sign-up-form {
   width: 100%;
   height: 55px;
   background-color: #f0f0f0;
-  margin: 10px 0;
+  margin-top: 20px;
+  margin-bottom: 20px;
   border-radius: 55px;
   display: grid;
-  grid-template-columns: 15% 85%;
+  grid-template-columns: [x0] 1fr [x1] 5fr [x2];
+  grid-template-rows: [y0] 1fr [y1] 1fr [y2];
   padding: 0 0.4rem;
   position: relative;
 }
@@ -93,6 +95,8 @@ form.sign-up-form {
   color: #acacac;
   transition: 0.5s;
   font-size: 1.1rem;
+  grid-row: y0/y1;
+  grid-column: x0/x1;
 }
 
 .input-field input {
@@ -103,11 +107,21 @@ form.sign-up-form {
   font-weight: 600;
   font-size: 1.1rem;
   color: #333;
+  grid-row: y0/y1;
+  grid-column: x1/x2;
 }
 
 .input-field input::placeholder {
   color: #aaa;
   font-weight: 500;
+}
+
+.errors {
+  color: #f44336; 
+  font-size: 0.85rem; 
+  display: inline; 
+  grid-row: y1/y2;
+  grid-column: x0/x2;
 }
 
 .btn {
@@ -322,11 +336,7 @@ form.sign-up-form {
   visibility: hidden;
   transition-delay: 1s;
 }
-.errors {
-  color: #f44336; 
-  font-size: 0.85rem; 
-  display: inline; 
-}
+
 .btn.transparent:hover {
   background-color: #333;
   color: #fff;
