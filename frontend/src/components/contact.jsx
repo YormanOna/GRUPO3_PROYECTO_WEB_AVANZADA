@@ -29,6 +29,9 @@ export function Conctactos() {
             dismissable: true,
             type: 'success',
           });
+          setTimeout(() => {
+            window.location.href = "/";
+          }, 1000);
 
         setEmail('');
         setSubject('');
