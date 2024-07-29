@@ -25,21 +25,14 @@ export function Login() {
         );
 
         if (user) {
-          butterup.toast({
-            title: `¡Hola, ${data.nombreUsuario}!`,
-            message: 'Su ingreso fue exitoso.',
-            location: 'top-right',
-            icon: false,
-            dismissable: true,
-            type: 'success',
-          });
-
           // Guardar el estado de autenticación
           localStorage.setItem('isAuthenticated', true);
           localStorage.setItem('user', JSON.stringify(user));
 
           setTimeout(() => {
-            if (data.nombreUsuario === 'MIGUEL' && data.password === '4321') {
+            if ((data.nombreUsuario === 'MIGUEL' && data.password === '4321') ||
+            (data.nombreUsuario === 'MARIA' && data.password === '12345') ||
+            (data.nombreUsuario === 'JUAN' && data.password === '12')) {
               butterup.toast({
                 title: `¡Hola, ${data.nombreUsuario}!`,
                 message: 'Bienvenido al panel de administración.',
@@ -48,29 +41,16 @@ export function Login() {
                 dismissable: true,
                 type: 'success',
               });
-              navigate('/admin');
-              
-            } else if (data.nombreUsuario === 'MARIA' && data.password === '12345') {
-              butterup.toast({
-                title: `¡Hola, ${data.nombreUsuario}!`,
-                message: 'Bienvenido al panel de administración.',
-                location: 'top-right',
-                icon: false,
-                dismissable: true,
-                type: 'success',
-              });
-              navigate('/admin');
-            } else if (data.nombreUsuario === 'JUAN' && data.password === '12') {
-              butterup.toast({
-                title: `¡Hola, ${data.nombreUsuario}!`,
-                message: 'Bienvenido al panel de administración.',
-                location: 'top-right',
-                icon: false,
-                dismissable: true,
-                type: 'success',
-              });
-              navigate('/admin');
+              navigate('/admin');  
             } else {
+              butterup.toast({
+                title: `¡Hola, ${data.nombreUsuario}!`,
+                message: 'Su ingreso fue exitoso.',
+                location: 'top-right',
+                icon: false,
+                dismissable: true,
+                type: 'success',
+              });
               navigate('/menu');
             }
           }, 1000);
