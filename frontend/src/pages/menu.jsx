@@ -103,6 +103,7 @@ export function Menu() {
                     <Catering />
                 </div>
             )}
+            
             <Footer />
         </div>
     );

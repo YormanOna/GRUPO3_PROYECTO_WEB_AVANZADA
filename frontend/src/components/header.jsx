@@ -6,7 +6,9 @@ import '../styles/header.css';
 export function Header() {
   return (
     <header className="header">
-      <img src={logo} alt="logo 1" />
+      <Link to="/" className='header-img2'>
+        <img src={logo} alt="logo 1" />
+      </Link>
       <div>
         <h1>Banana's Cocktails</h1>
         <p>Servicio de Bartender y Catering</p>
