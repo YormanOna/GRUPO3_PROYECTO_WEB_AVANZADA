@@ -86,8 +86,8 @@ DATABASES = {
     }
 }
 
-DATABASES["default"] = dj_database_url.parse("postgresql://cocktailsdb_3j64_user:yw1YnBUclmSDntq5qAHeTcQZd5bvIvdk@dpg-cqh1q1cs1f4s73bhnsug-a.oregon-postgres.render.com/cocktailsdb_3j64")
-
+DATABASES["default"] = dj_database_url.parse("postgresql://cocktailsproject_user:yPTatQG2Zfk25UAkioGn9RMs142yiqVF@dpg-cqrpnql6l47c739tkrjg-a.oregon-postgres.render.com/cocktailsproject")
+ #postgresql://cocktailsproject_user:yPTatQG2Zfk25UAkioGn9RMs142yiqVF@dpg-cqrpnql6l47c739tkrjg-a.oregon-postgres.render.com/cocktailsproject
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
