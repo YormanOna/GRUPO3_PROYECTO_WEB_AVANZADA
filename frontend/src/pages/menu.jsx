@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import HTMLFlipBook from 'react-pageflip';
+import { useNavigate } from 'react-router-dom';
 import '../styles/menu.css';
 import { Header } from '../components/header';
 import { Footer } from '../components/footer';
@@ -16,8 +17,9 @@ import Fin from '../images/Menu/Fin.png';
 
 export function Menu() {
     const book = useRef();
-    const [showBartender, setShowBartender] = useState(true); // Estado para mostrar el menú de bartender
-    const [showCatering, setShowCatering] = useState(false); // Estado para mostrar el menú de catering
+    const navigate = useNavigate(); // Hook para la navegación
+    const [showBartender, setShowBartender] = useState(true);
+    const [showCatering, setShowCatering] = useState(false);
 
     const nextPage = () => {
         book.current.pageFlip().flipNext();
@@ -35,6 +37,10 @@ export function Menu() {
     const handleCateringClick = () => {
         setShowBartender(false);
         setShowCatering(true);
+    };
+
+    const handleQuotationClick = () => {
+        navigate('/cotizacion'); 
     };
 
     return (
@@ -104,6 +110,10 @@ export function Menu() {
                 </div>
             )}
             
+            <button className="quotation-button" onClick={handleQuotationClick}>
+                ¡Realiza tu cotización ahora!
+            </button>
+
             <Footer />
         </div>
     );
