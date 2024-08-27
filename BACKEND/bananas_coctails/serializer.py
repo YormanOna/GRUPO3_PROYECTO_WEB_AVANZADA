@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Coctail, Paquetes, Clientes, CuentaCliente
+from .models import Coctail, Paquetes, Clientes, CuentaCliente, Reserva
 
 class CoctailSerializer(serializers.ModelSerializer):
     class Meta:
@@ -19,4 +19,9 @@ class ClientesSerializer(serializers.ModelSerializer):
 class CuentaClienteSerializer(serializers.ModelSerializer):
     class Meta:
         model = CuentaCliente
+        fields = '__all__'
+        
+class ReservaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Reserva
         fields = '__all__'

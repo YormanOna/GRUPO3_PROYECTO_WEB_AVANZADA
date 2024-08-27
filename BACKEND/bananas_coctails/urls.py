@@ -9,6 +9,7 @@ router.register(r'coctails', views.CoctailViewSet,'coctails')
 router.register(r'paquetes', views.PaquetesViewSet,'paquetes')
 router.register(r'clientes', views.ClientesViewSet,'clientes')
 router.register(r'cuentacliente', views.CuentaClienteViewSet,'cuentacliente')
+router.register(r'reservas', views.ReservaViewSet, basename='reserva')
 
 urlpatterns = [
     path('api/info/',include(router.urls)),

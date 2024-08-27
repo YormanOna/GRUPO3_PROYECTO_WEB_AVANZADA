@@ -1,7 +1,8 @@
 import React from "react";
 import { CoctelManager } from "../../components/managerCoctails";
 import { PaqueteManager } from "../../components/managerPaquetes";
-import '../../styles/admin.css'; 
+import { ListaReservas } from "../../components/ListaReservas"; // Asegúrate de importar el nuevo componente
+import '../../styles/admin.css';
 
 export function AdminHome() {
   const [activeTab, setActiveTab] = React.useState("cocktails");
@@ -22,10 +23,17 @@ export function AdminHome() {
         >
           Paquetes
         </button>
+        <button
+          className={`tab-button ${activeTab === "reservations" ? "active" : ""}`}
+          onClick={() => setActiveTab("reservations")}
+        >
+          Reservas
+        </button>
       </div>
       <div className="tab-content">
         {activeTab === "cocktails" && <CoctelManager />}
         {activeTab === "packages" && <PaqueteManager />}
+        {activeTab === "reservations" && <ListaReservas />}
       </div>
     </div>
   );

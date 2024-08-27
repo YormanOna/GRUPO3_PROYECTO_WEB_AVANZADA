@@ -1,6 +1,6 @@
 from rest_framework import viewsets
-from .serializer import CoctailSerializer, PaquetesSerializer, ClientesSerializer, CuentaClienteSerializer
-from .models import Coctail, Paquetes, Clientes, CuentaCliente
+from .serializer import CoctailSerializer, PaquetesSerializer, ClientesSerializer, CuentaClienteSerializer, ReservaSerializer
+from .models import Coctail, Paquetes, Clientes, CuentaCliente, Reserva
 
 from django.core.mail import send_mail
 from django.http import JsonResponse
@@ -23,6 +23,10 @@ class ClientesViewSet(viewsets.ModelViewSet):
 class CuentaClienteViewSet(viewsets.ModelViewSet):
     queryset = CuentaCliente.objects.all()
     serializer_class = CuentaClienteSerializer
+
+class ReservaViewSet(viewsets.ModelViewSet):
+    queryset = Reserva.objects.all()
+    serializer_class = ReservaSerializer
 
 
 @csrf_exempt

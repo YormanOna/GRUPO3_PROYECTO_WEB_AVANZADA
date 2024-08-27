@@ -38,6 +38,7 @@ export function CoctelManager() {
     formData.append('nombre', data.nombre);
     formData.append('tipo', data.tipo);
     formData.append('cantidad', data.cantidad);
+    formData.append('precio', data.precio);
     formData.append('garnishes', data.garnishes);
     formData.append('mixers', data.mixers);
     if (data.imagen.length > 0) {
@@ -88,6 +89,7 @@ export function CoctelManager() {
       setValue('nombre', coctel.nombre);
       setValue('tipo', coctel.tipo);
       setValue('cantidad', coctel.cantidad);
+      setValue('precio', coctel.precio);
       setValue('garnishes', coctel.garnishes);
       setValue('mixers', coctel.mixers);
       // Para el campo de imagen, no es necesario setearlo en el formulario
@@ -127,6 +129,7 @@ export function CoctelManager() {
     setValue('nombre', '');
     setValue('tipo', '');
     setValue('cantidad', '');
+    setValue('precio', '');
     setValue('garnishes', '');
     setValue('mixers', '');
     setValue('imagen', '');
@@ -162,6 +165,13 @@ export function CoctelManager() {
         />
         {errors.cantidad && <span>{errors.cantidad.message}</span>}
 
+        <label>Precio</label>
+        <input
+          type="number"
+          name="precio"
+          {...register("precio", { required: "El precio es obligatorio", valueAsNumber: true })}
+        />
+        {errors.precio && <span>{errors.precio.message}</span>}
         <label>Garnishes</label>
         <input
           type="text"
@@ -193,7 +203,7 @@ export function CoctelManager() {
       <ul>
         {cocteles.map((coctel) => (
           <li key={coctel.id}>
-            {coctel.nombre} - {coctel.tipo}
+            {coctel.nombre} - {coctel.tipo} - {coctel.precio}
             <button onClick={() => handleEdit(coctel.id)}>Editar</button>
             <button onClick={() => handleDelete(coctel.id)}>Eliminar</button>
           </li>

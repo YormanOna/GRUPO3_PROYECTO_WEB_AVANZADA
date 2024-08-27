@@ -49,3 +49,10 @@ export const actualizarPaquete = (id, data) => {
 export const eliminarPaquete = (id) => {
     return API_URL.delete(`paquetes/${id}`)
 }
+
+export const guardarReserva = (data) => {
+    return API_URL.post('reservas/', data)
+}
+export const obtenerReservas = () => {
+    return API_URL.get('reservas/')
+}
