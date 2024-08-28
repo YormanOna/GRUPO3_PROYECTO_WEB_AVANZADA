@@ -151,7 +151,7 @@ export function Cotizacion() {
       {!mostrarCotizacion ? (
         <div className="bodyC">
           <div className="containerC">
-            <h1 className="titleC">Cotización</h1>
+            <h1 className="titleC">¡Bienvenido a nuestra sección de Cotización Automática!</h1>
             <div className="sectionC">
               <h2 className="section-titleC">Servicio</h2>
               <select
