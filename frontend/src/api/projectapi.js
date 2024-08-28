@@ -31,7 +31,7 @@ export const actualizarCoctel = (id, data) => {
     return API_URL.put(`coctails/${id}/`, data);
 };
 export const eliminarCoctel = (id) => {
-    return API_URL.delete(`coctails/${id}`)
+    return API_URL.delete(`coctails/${id}/`)
 }
 
 export const obtenerPaquetes = () => {
@@ -47,7 +47,7 @@ export const actualizarPaquete = (id, data) => {
     return API_URL.put(`paquetes/${id}/`, data);
 };
 export const eliminarPaquete = (id) => {
-    return API_URL.delete(`paquetes/${id}`)
+    return API_URL.delete(`paquetes/${id}/`)
 }
 
 export const guardarReserva = (data) => {

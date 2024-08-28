@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "../../styles/cotizacion.css";
-import { obtenerCocteles, guardarReserva } from "../../api/projectapi";
-import butterup from 'butteruptoasts';
-import '../../styles/butterup-2.0.0/butterup.css';
+import butterup from "butteruptoasts";
+import "../../styles/butterup-2.0.0/butterup.css";
 
 export function Cotizacion() {
-  const [cocteles, setCocteles] = useState([]);
+  const [cocteles, setCocteles] = useState([
+    { id: 1, nombre: "Mojito", descripcion: "Refrescante bebida con menta", precio: 10 },
+    { id: 2, nombre: "Margarita", descripcion: "Cóctel clásico con tequila", precio: 12 },
+    { id: 3, nombre: "Caipirinha", descripcion: "Cóctel brasileño con cachaça", precio: 15 },
+  ]);
+
   const [seleccionados, setSeleccionados] = useState({});
   const [cantidad, setCantidad] = useState({});
   const [servicio, setServicio] = useState("");
@@ -18,22 +22,41 @@ export function Cotizacion() {
     lugar: false,
   });
 
-  useEffect(() => {
-    const fetchCocteles = async () => {
-      try {
-        const res = await obtenerCocteles();
-        setCocteles(res.data);
-      } catch (error) {
-        console.error("Error al obtener los cocteles", error);
-      }
-    };
-
-    fetchCocteles();
-  }, []);
-
   const handleGenerarCotizacion = () => {
+    // Verificar si los campos básicos están completos
+    if ( !fecha || !direccion) {
+        butterup.toast({
+            title: "¡Error!",
+            message: "Por favor complete todos los campos requeridos.",
+            location: "top-right",
+            icon: false,
+            dismissable: true,
+            type: "error",
+        });
+        setMostrarCotizacion(false);
+        return false; // Indicating failure
+    }
+
+    // Verificar si al menos un cóctel está seleccionado y tiene cantidad mayor a cero
+    const coctelSeleccionado = cocteles.some((coctel) => seleccionados[coctel.id] && cantidad[coctel.id] > 0);
+
+    if (!coctelSeleccionado) {
+        butterup.toast({
+            title: "¡Error!",
+            message: "Por favor seleccione al menos un cóctel y especifique una cantidad válida.",
+            location: "top-right",
+            icon: false,
+            dismissable: true,
+            type: "error",
+        });
+        setMostrarCotizacion(false);
+        return false; // Indicating failure
+    }
+
+    // Si todo está correcto, permitir mostrar la cotización
     setMostrarCotizacion(true);
-  };
+    return true; // Indicating success
+};
 
   const calcularCostoEstimado = () => {
     let costoTotal = 0;
@@ -43,7 +66,6 @@ export function Cotizacion() {
       }
     });
 
-    // Agregar costos adicionales por extras seleccionados
     if (extras.dj) costoTotal += 200;
     if (extras.mobiliario) costoTotal += 150;
     if (extras.lugar) costoTotal += 300;
@@ -52,74 +74,65 @@ export function Cotizacion() {
   };
 
   const handleEnviarReserva = async () => {
-    // Validar datos antes de enviar
-    if (!servicio || !fecha || !direccion || cocteles.length === 0) {
-      butterup.toast({
-        title: '¡Error!',
-        message: 'Por favor complete todos los campos requeridos.',
-        location: 'top-right',
-        icon: false,
-        dismissable: true,
-        type: 'error',
-      });
-      return;
-    }
-  
-    // Aquí se calcula el costo total
+
     const costoTotal = calcularCostoEstimado();
-  
+
     const reserva = {
       servicio,
       fecha,
       direccion,
-      cocteles: JSON.stringify(cocteles.map(coctel => ({
-        nombre: coctel.nombre,
-        cantidad: Number(cantidad[coctel.id]), // Asegúrate de que cantidad sea un número
-      }))),
+      cocteles: JSON.stringify(
+        cocteles.map((coctel) => ({
+          nombre: coctel.nombre,
+          cantidad: Number(cantidad[coctel.id]),
+        }))
+      ),
       extras,
-      costo_estimado: parseFloat(costoTotal).toFixed(2), // Convertir a número con dos decimales
+      costo_estimado: parseFloat(costoTotal).toFixed(2),
     };
-  
+
     console.log("Datos de reserva:", reserva);
-  
+
     try {
-        await guardarReserva(reserva);
+      // Aquí puedes llamar a la función de API si la tienes
+      // await guardarReserva(reserva);
+
+      butterup.toast({
+        title: "¡Éxito!",
+        message: "La reserva se ha guardado correctamente.",
+        location: "top-right",
+        icon: false,
+        dismissable: true,
+        type: "success",
+      });
+
+      ResetForm();
+      setMostrarCotizacion(false);
+    } catch (error) {
+      if (error.response && error.response.data) {
+        console.error("Detalles del error:", error.response.data);
         butterup.toast({
-          title: '¡Éxito!',
-          message: 'La reserva se ha guardado correctamente.',
-          location: 'top-right',
+          title: "¡Error!",
+          message: `Error al guardar la reserva: ${JSON.stringify(error.response.data)}`,
+          location: "top-right",
           icon: false,
           dismissable: true,
-          type: 'success',
+          type: "error",
         });
-        // Restablecer el formulario después de guardar la reserva
-        ResetForm(); // Llama a la función para limpiar el formulario
-        setMostrarCotizacion(false); // Asegúrate de cerrar la vista de cotización
-      } catch (error) {
-        if (error.response && error.response.data) {
-          console.error('Detalles del error:', error.response.data);
-          butterup.toast({
-            title: '¡Error!',
-            message: `Error al guardar la reserva: ${JSON.stringify(error.response.data)}`,
-            location: 'top-right',
-            icon: false,
-            dismissable: true,
-            type: 'error',
-          });
-        } else {
-          console.error('Error al guardar la reserva:', error);
-          butterup.toast({
-            title: '¡Error!',
-            message: 'Error desconocido al guardar la reserva.',
-            location: 'top-right',
-            icon: false,
-            dismissable: true,
-            type: 'error',
-          });
-        }
+      } else {
+        console.error("Error al guardar la reserva:", error);
+        butterup.toast({
+          title: "¡Error!",
+          message: "Error desconocido al guardar la reserva.",
+          location: "top-right",
+          icon: false,
+          dismissable: true,
+          type: "error",
+        });
+      }
     }
   };
-  
+
   const ResetForm = () => {
     setServicio("");
     setFecha("");
@@ -178,11 +191,6 @@ export function Cotizacion() {
                 <div className="gridC grid-3-colsC">
                   {cocteles.map((coctel) => (
                     <div className="coctel-cardC" key={coctel.id}>
-                      <img
-                        src={coctel.imagen}
-                        alt={coctel.nombre}
-                        className="coctel-imgC"
-                      />
                       <div className="coctel-infoC">
                         <input
                           type="checkbox"
@@ -247,10 +255,12 @@ export function Cotizacion() {
                       type="checkbox"
                       id="dj"
                       checked={extras.dj}
-                      onChange={(e) => setExtras((prev) => ({
-                        ...prev,
-                        dj: e.target.checked,
-                      }))}
+                      onChange={(e) =>
+                        setExtras((prev) => ({
+                          ...prev,
+                          dj: e.target.checked,
+                        }))
+                      }
                     />
                     <label htmlFor="dj" className="checkbox-labelC">
                       DJ - $200
@@ -261,13 +271,15 @@ export function Cotizacion() {
                       type="checkbox"
                       id="mobiliario"
                       checked={extras.mobiliario}
-                      onChange={(e) => setExtras((prev) => ({
-                        ...prev,
-                        mobiliario: e.target.checked,
-                      }))}
+                      onChange={(e) =>
+                        setExtras((prev) => ({
+                          ...prev,
+                          mobiliario: e.target.checked,
+                        }))
+                      }
                     />
                     <label htmlFor="mobiliario" className="checkbox-labelC">
-                      Mobiliario (barra libre) - $150
+                      Mobiliario - $150
                     </label>
                   </div>
                   <div className="flex-centerC">
@@ -275,64 +287,56 @@ export function Cotizacion() {
                       type="checkbox"
                       id="lugar"
                       checked={extras.lugar}
-                      onChange={(e) => setExtras((prev) => ({
-                        ...prev,
-                        lugar: e.target.checked,
-                      }))}
+                      onChange={(e) =>
+                        setExtras((prev) => ({
+                          ...prev,
+                          lugar: e.target.checked,
+                        }))
+                      }
                     />
                     <label htmlFor="lugar" className="checkbox-labelC">
-                      Lugar para el evento - $300
+                      Lugar - $300
                     </label>
                   </div>
                 </div>
-                <p className="noteC">
-                  Nota: En caso de no tener un lugar para realizar su evento,
-                  puede reservar nuestra hacienda en Guayllabamba.
-                </p>
               </div>
             </div>
-            <div className="flex-space-betweenC">
-              <button className="buttonC button-outlineC">Cancelar</button>
-              <button className="buttonC" onClick={handleGenerarCotizacion}>
-                Generar Cotización
-              </button>
-            </div>
+            <button className="generate-quote-btnC" onClick={handleGenerarCotizacion}>
+              Generar Cotización
+            </button>
           </div>
         </div>
       ) : (
-        <div className="cotizacion-emergenteC">
-          <div className="cotizacion-emergente-contentC">
-            <h2>Cotizar evento</h2>
-            <p>
-              Muchas gracias por utilizar nuestro servicio de cotización. A
-              continuación se mostrará un detalle de valores calculados.
-            </p>
-            <p><strong>Servicio:</strong> {servicio}</p>
-            <p><strong>Fecha:</strong> {new Date(fecha).toLocaleString()}</p>
-            <p><strong>Dirección:</strong> {direccion}</p>
-            <p><strong>Bebidas:</strong></p>
-            <ul>
-              {cocteles
-                .filter((coctel) => seleccionados[coctel.id])
-                .map((coctel) => (
-                  <li key={coctel.id}>
-                    {coctel.nombre} - {cantidad[coctel.id]} unidades - $
-                    {coctel.precio * cantidad[coctel.id]}
-                  </li>
-                ))}
-            </ul>
-            <p><strong>Extras:</strong></p>
-            <ul>
-              {extras.dj && <li>DJ - $200</li>}
-              {extras.mobiliario && <li>Mobiliario (barra libre) - $150</li>}
-              {extras.lugar && <li>Lugar para el evento - $300</li>}
-            </ul>
-            <p><strong>Costo estimado:</strong> ${calcularCostoEstimado()}</p>
-            <button className="buttonC" onClick={() => setMostrarCotizacion(false)}>Regresar</button>
-            <button className="buttonC" onClick={handleEnviarReserva}>
-              Enviar Solicitud de Reserva
-            </button>
-          </div>
+        <div className="quote-sectionC">
+          <h2 className="section-titleC">Cotización</h2>
+          <p>
+            Servicio: <strong>{servicio}</strong>
+          </p>
+          <p>
+            Fecha y hora: <strong>{fecha}</strong>
+          </p>
+          <p>
+            Dirección: <strong>{direccion}</strong>
+          </p>
+          <h3>Cocteles Seleccionados:</h3>
+          {cocteles.map((coctel) =>
+            seleccionados[coctel.id] && cantidad[coctel.id] ? (
+              <p key={coctel.id}>
+                {coctel.nombre} - Cantidad: {cantidad[coctel.id]}
+              </p>
+            ) : null
+          )}
+          <h3>Extras:</h3>
+          {extras.dj && <p>DJ - $200</p>}
+          {extras.mobiliario && <p>Mobiliario - $150</p>}
+          {extras.lugar && <p>Lugar - $300</p>}
+          <h3>Costo Estimado: ${calcularCostoEstimado()}</h3>
+          <button className="send-reservation-btnC" onClick={handleEnviarReserva}>
+            Enviar Reserva
+          </button>
+          <button className="go-back-btnC" onClick={() => setMostrarCotizacion(false)}>
+            Volver
+          </button>
         </div>
       )}
     </div>

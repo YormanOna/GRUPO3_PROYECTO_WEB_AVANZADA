@@ -1,0 +1,211 @@
+/* Base colors */
+:root {
+    --background: #ffffff;
+    --foreground: #000000;
+    --primary: #1c446a;
+    --primary-foreground: #ffffff;
+    --card: #f8f9fa;
+    --accent: #d1ecf1;
+    --accent-foreground: #0c5460;
+    --success: #28a745;
+    --error: #dc3545;
+    --muted-foreground: #6c757d;
+  }
+  
+  /* Background and text colors */
+  .bg-backgroundCL {
+    background-color: var(--background);
+  }
+  
+  .text-foregroundCL {
+    color: var(--foreground);
+  }
+  
+  /* Primary and card colors */
+  .bg-primaryCL {
+    background-color: var(--primary);
+  }
+  
+  .text-primary-foregroundCL {
+    color: var(--primary-foreground);
+  }
+  
+  .bg-cardCL {
+    background-color: var(--card);
+  }
+  
+  /* Text colors */
+  .text-successCL {
+    color: var(--success);
+  }
+  
+  .text-errorCL {
+    color: var(--error);
+  }
+  
+  .text-muted-foregroundCL {
+    color: var(--muted-foreground);
+  }
+  
+  /* Header styles */
+  .headerCL {
+    padding: 1rem 1.5rem;
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+  
+  .flexCL {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .gap-4CL {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .text-2xlCL {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  /* Main section styles */
+  .mainCL {
+    padding: 1.5rem;
+    background-color: var(--background);
+  }
+  
+  .gridCL {
+    display: grid;
+    gap: 1rem;
+  }
+  
+  .grid-cols-7CL {
+    grid-template-columns: repeat(7, 1fr);
+  }
+  
+  .day-headerCL {
+    font-weight: bold;
+    text-align: center;
+    padding: 0.5rem 0;
+    background-color: var(--card);
+  }
+  
+  /* Card styles */
+  .cardCL {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    background-color: var(--card);
+  }
+  
+  .cardCL.availableCL:hover {
+    background-color: var(--accent);
+    color: var(--accent-foreground);
+  }
+  
+  .cardCL.bookedCL {
+    background-color: var(--error);
+    color: var(--primary-foreground);
+    cursor: not-allowed;
+  }
+  
+  .cardCL.bookedCL:hover {
+    background-color: var(--error);
+    color: var(--primary-foreground);
+  }
+  
+  /* Text styles */
+  .text-centerCL {
+    text-align: center;
+  }
+  
+  .font-mediumCL {
+    font-weight: 500;
+  }
+  
+  .mt-2CL {
+    margin-top: 0.5rem;
+  }
+  
+  .mt-4CL {
+    margin-top: 1rem;
+  }
+  
+  .mt-6CL {
+    margin-top: 1.5rem;
+  }
+  
+  .p-4CL {
+    padding: 1rem;
+  }
+  
+  .rounded-lgCL {
+    border-radius: 0.5rem;
+  }
+  
+  /* Button styles */
+  .buttonCL {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .buttonCL.primaryCL {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+  
+  .buttonCL.primaryCL:hover {
+    background-color: #004085;
+  }
+  
+  .buttonCL.secondaryCL {
+    background-color: #6c757d;
+    color: var(--primary-foreground);
+  }
+  
+  .buttonCL.secondaryCL:hover {
+    background-color: #5a6268;
+  }
+  
+  /* Modal styles */
+  .modalCL {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.3);
+  }
+  
+  .modal-contentCL {
+    background: var(--card);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    width: 300px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Input styles */
+  .inputCL {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+    margin-top: 0.25rem;
+  }
+  
