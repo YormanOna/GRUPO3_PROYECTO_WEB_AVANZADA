@@ -139,9 +139,9 @@ export function CoctelManager() {
 
   return (
     <div className="containerADmi">
-      <h1>{isEditing ? 'Editar Coctel' : 'Registrar Coctel'}</h1>
+      <h1>{isEditing ? 'Editar Cóctel' : 'Registrar Cóctel'}</h1>
       <form onSubmit={onSubmit} encType="multipart/form-data">
-        <label>Nombre del Coctel</label>
+        <label>Nombre del Cóctel</label>
         <input
           type="text"
           name="nombre"
@@ -199,7 +199,7 @@ export function CoctelManager() {
         {isEditing && <button type="button" onClick={resetForm}>Cancelar</button>}
       </form>
 
-      <h2>Lista de Cocteles</h2>
+      <h2>Lista de Cócteles</h2>
       <ul>
         {cocteles.map((coctel) => (
           <li key={coctel.id}>

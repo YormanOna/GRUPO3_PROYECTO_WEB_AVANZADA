@@ -8,6 +8,7 @@ export function AdminHome() {
   const [activeTab, setActiveTab] = React.useState("cocktails");
 
   return (
+    <div className="bodyA">
     <div className="admin-container">
       <h1>Panel de Administración</h1>
       <div className="tab-buttons">
@@ -15,7 +16,7 @@ export function AdminHome() {
           className={`tab-button ${activeTab === "cocktails" ? "active" : ""}`}
           onClick={() => setActiveTab("cocktails")}
         >
-          Cocteles
+          Cócteles
         </button>
         <button
           className={`tab-button ${activeTab === "packages" ? "active" : ""}`}
@@ -35,6 +36,7 @@ export function AdminHome() {
         {activeTab === "packages" && <PaqueteManager />}
         {activeTab === "reservations" && <ListaReservas />}
       </div>
+    </div>
     </div>
   );
 }
