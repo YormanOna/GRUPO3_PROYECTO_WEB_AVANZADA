@@ -1,123 +1,155 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { obtenerReservas } from '../../api/projectapi';
 import '../../styles/calendario.css';
 
 export function Calendario() {
   const barName = "Bananas Cocktails";
   const daysOfWeek = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
-  const availability = [
-    { date: "2023-06-01", status: "disponible" },
-    { date: "2023-06-02", status: "reservado" },
-    { date: "2023-06-03", status: "disponible" },
-    { date: "2023-06-04", status: "reservado" },
-    { date: "2023-06-05", status: "disponible" },
-    { date: "2023-06-06", status: "reservado" },
-    { date: "2023-06-07", status: "disponible" },
-    { date: "2023-06-08", status: "reservado" },
-    { date: "2023-06-09", status: "disponible" },
-    { date: "2023-06-10", status: "reservado" },
-    { date: "2023-06-11", status: "disponible" },
-    { date: "2023-06-12", status: "reservado" },
-    { date: "2023-06-13", status: "disponible" },
-    { date: "2023-06-14", status: "reservado" },
-    { date: "2023-06-15", status: "disponible" },
-  ];
-
+  const [reservas, setReservas] = useState([]);
   const [selectedDate, setSelectedDate] = useState(null);
-  const [selectedTime, setSelectedTime] = useState('');
-  const [modalVisible, setModalVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
+  const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
+
+  useEffect(() => {
+    const fetchReservas = async () => {
+      try {
+        // Asumimos que obtenerReservas acepta parámetros de mes y año
+        const res = await obtenerReservas(currentMonth + 1, currentYear);
+        setReservas(res.data);
+      } catch (error) {
+        setError("Error al obtener las reservas");
+        console.error("Error al obtener las reservas", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchReservas();
+  }, [currentMonth, currentYear]);
 
   const handleDateSelect = (date) => {
-    setSelectedDate(date);
-    setModalVisible(true);
+    const reservation = reservas.find((reserva) => reserva.fecha === date);
+    if (reservation) {
+      alert('Esta fecha ya está reservada.');
+    } else {
+      setSelectedDate(date);
+      // Aquí puedes agregar la lógica para manejar la selección de una fecha disponible
+      // Por ejemplo, redirigir a una página de reserva o mostrar más información
+    }
   };
 
-  const handleSubmit = () => {
-    // Aquí puedes manejar la lógica para guardar la reserva con fecha y hora
-    alert(`Reserva confirmada para ${selectedDate} a las ${selectedTime}`);
-    setModalVisible(false);
-    setSelectedDate(null);
-    setSelectedTime('');
+  const handlePrevMonth = () => {
+    if (currentMonth === 0) {
+      setCurrentMonth(11);
+      setCurrentYear(currentYear - 1);
+    } else {
+      setCurrentMonth(currentMonth - 1);
+    }
   };
 
-  const startDate = new Date(availability[0].date);
-  const startDay = startDate.getDay();
+  const handleNextMonth = () => {
+    if (currentMonth === 11) {
+      setCurrentMonth(0);
+      setCurrentYear(currentYear + 1);
+    } else {
+      setCurrentMonth(currentMonth + 1);
+    }
+  };
+
+  const firstDayOfMonth = new Date(currentYear, currentMonth, 1);
+  const startDay = firstDayOfMonth.getDay();
+  const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+  const calendarDays = Array.from({ length: daysInMonth }, (_, i) => {
+    const date = new Date(currentYear, currentMonth, i + 1);
+    const dateString = date.toISOString().split('T')[0];
+    const isReserved = reservas.some(reserva => reserva.fecha === dateString);
+    return { date, dateString, isReserved };
+  });
 
   return (
-    <div className="bg-backgroundCL text-foregroundCL">
-      <header className="headerCL">
-        <div className="flexCL">
-          <div className="gap-4CL">
-            <img
-              src="https://i.pinimg.com/originals/46/09/7c/46097ce4f245a1e5d767033fed857dfd.png"
-              alt={barName}
-              width={60}
-              height={60}
-              style={{ aspectRatio: "40/40", objectFit: "cover" }}
-            />
-            <h1 className="text-2xlCL">{barName}</h1>
-          </div>
-          <button className="buttonCL secondaryCL">Reserva ahora</button>
+    <div className="cl-calendar-container">
+      <header className="cl-header">
+        <div className="cl-header-content">
+          <img
+            src="https://i.pinimg.com/originals/46/09/7c/46097ce4f245a1e5d767033fed857dfd.png"
+            alt={barName}
+            className="cl-bar-image"
+            onError={(e) => (e.target.style.display = 'none')} 
+          />
+          <h1 className="cl-bar-name">{barName}</h1>
+          <button className="cl-reserve-button">
+            Reserva ahora
+          </button>
         </div>
       </header>
-      <main className="mainCL">
-        <div className="gridCL grid-cols-7CL">
-          {daysOfWeek.map((day) => (
-            <div key={day} className="day-headerCL">
-              {day}
-            </div>
-          ))}
-          {Array.from({ length: startDay }).map((_, index) => (
-            <div key={index} className="cardCL emptyCL"></div>
-          ))}
-          {availability.map((day) => (
-            <div
-              key={day.date}
-              className={`cardCL ${day.status === "disponible" ? "availableCL" : "bookedCL"}`}
-              onClick={() => day.status === "disponible" && handleDateSelect(day.date)}
-            >
-              <div className="text-centerCL font-mediumCL">
-                {new Date(day.date).getDate()}
+      <main className="cl-main-content">
+        <section className="cl-calendar-section">
+          {isLoading ? (
+            <p className="cl-loading-text">Cargando...</p>
+          ) : error ? (
+            <p className="cl-error-text">{error}</p>
+          ) : (
+            <div className="cl-calendar">
+              <div className="cl-calendar-nav">
+                <button className="cl-nav-button" onClick={handlePrevMonth}>Anterior</button>
+                <span className="cl-current-month">{firstDayOfMonth.toLocaleString('es-ES', { month: 'long', year: 'numeric' })}</span>
+                <button className="cl-nav-button" onClick={handleNextMonth}>Siguiente</button>
               </div>
-              {day.status === "reservado" && (
-                <div className="mt-2CL text-xsCL font-mediumCL text-errorCL">Reservado</div>
-              )}
-              {day.status === "disponible" && (
-                <div className="mt-2CL text-xsCL font-mediumCL text-successCL">Disponible</div>
-              )}
+              <div className="cl-days-of-week">
+                {daysOfWeek.map((day) => (
+                  <div key={day} className="cl-day-name">
+                    {day}
+                  </div>
+                ))}
+              </div>
+              <div className="cl-days-grid">
+                {Array.from({ length: startDay }).map((_, index) => (
+                  <div key={`empty-${index}`} className="cl-empty-day"></div>
+                ))}
+                {calendarDays.map(({ date, dateString, isReserved }) => (
+                  <div
+                    key={dateString}
+                    className={`cl-day ${isReserved ? "cl-reserved" : "cl-available"}`}
+                    onClick={() => !isReserved && handleDateSelect(dateString)}
+                  >
+                    <span className="cl-day-number">{date.getDate()}</span>
+                  </div>
+                ))}
+              </div>
             </div>
-          ))}
-        </div>
-        <div className="legendCL">
-          <div className="itemCL">
-            <div className="circleCL availableCL"></div>
+          )}
+        </section>
+        <section className="cl-info-section">
+          <div className="cl-info-box">
+            <h2 className="cl-info-title">Información de reserva</h2>
+            {selectedDate && (
+              <div>
+                <p className="cl-info-text">Fecha seleccionada: {new Date(selectedDate).toLocaleDateString()}</p>
+                <p className="cl-info-text">Esta fecha está disponible para reserva.</p>
+                {/* Aquí puedes agregar un enlace o botón para iniciar el proceso de reserva */}
+              </div>
+            )}
+            {!selectedDate && (
+              <p className="cl-info-text">Selecciona una fecha en el calendario para ver más información.</p>
+            )}
+          </div>
+        </section>
+      </main>
+      <footer className="cl-footer">
+        <div className="cl-footer-content">
+          <div className="cl-status-item">
+            <div className="cl-status-indicator cl-available-indicator"></div>
             <span>Disponible</span>
           </div>
-          <div className="itemCL">
-            <div className="circleCL bookedCL"></div>
-            <span className="span_rojoCL">Reservado</span>
+          <div className="cl-status-item">
+            <div className="cl-status-indicator cl-reserved-indicator"></div>
+            <span>Reservado</span>
           </div>
         </div>
-        {modalVisible && (
-          <div className="modalCL">
-            <div className="modal-contentCL">
-              <h2 className="text-lgCL">Reserva para {new Date(selectedDate).toLocaleDateString()}</h2>
-              <div className="mt-4CL">
-                <label className="blockCL">Selecciona la hora:</label>
-                <input
-                  type="time"
-                  value={selectedTime}
-                  onChange={(e) => setSelectedTime(e.target.value)}
-                  className="inputCL"
-                />
-              </div>
-              <div className="mt-4CL flexCL gap-2CL">
-                <button onClick={handleSubmit} className="buttonCL primaryCL">Confirmar</button>
-                <button onClick={() => setModalVisible(false)} className="buttonCL secondaryCL">Cancelar</button>
-              </div>
-            </div>
-          </div>
-        )}
-      </main>
+      </footer>
     </div>
   );
 }

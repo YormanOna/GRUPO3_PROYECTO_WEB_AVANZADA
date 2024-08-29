@@ -1,211 +1,254 @@
-/* Base colors */
-:root {
-    --background: #ffffff;
-    --foreground: #000000;
-    --primary: #1c446a;
-    --primary-foreground: #ffffff;
-    --card: #f8f9fa;
-    --accent: #d1ecf1;
-    --accent-foreground: #0c5460;
-    --success: #28a745;
-    --error: #dc3545;
-    --muted-foreground: #6c757d;
-  }
-  
-  /* Background and text colors */
-  .bg-backgroundCL {
-    background-color: var(--background);
-  }
-  
-  .text-foregroundCL {
-    color: var(--foreground);
-  }
-  
-  /* Primary and card colors */
-  .bg-primaryCL {
-    background-color: var(--primary);
-  }
-  
-  .text-primary-foregroundCL {
-    color: var(--primary-foreground);
-  }
-  
-  .bg-cardCL {
-    background-color: var(--card);
-  }
-  
-  /* Text colors */
-  .text-successCL {
-    color: var(--success);
-  }
-  
-  .text-errorCL {
-    color: var(--error);
-  }
-  
-  .text-muted-foregroundCL {
-    color: var(--muted-foreground);
-  }
-  
-  /* Header styles */
-  .headerCL {
-    padding: 1rem 1.5rem;
-    background-color: var(--primary);
-    color: var(--primary-foreground);
-  }
-  
-  .flexCL {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  .gap-4CL {
-    display: flex;
-    gap: 1rem;
-  }
-  
-  .text-2xlCL {
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
-  
-  /* Main section styles */
-  .mainCL {
-    padding: 1.5rem;
-    background-color: var(--background);
-  }
-  
-  .gridCL {
-    display: grid;
-    gap: 1rem;
-  }
-  
-  .grid-cols-7CL {
-    grid-template-columns: repeat(7, 1fr);
-  }
-  
-  .day-headerCL {
-    font-weight: bold;
-    text-align: center;
-    padding: 0.5rem 0;
-    background-color: var(--card);
-  }
-  
-  /* Card styles */
-  .cardCL {
-    padding: 1rem;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100px;
-    background-color: var(--card);
-  }
-  
-  .cardCL.availableCL:hover {
-    background-color: var(--accent);
-    color: var(--accent-foreground);
-  }
-  
-  .cardCL.bookedCL {
-    background-color: var(--error);
-    color: var(--primary-foreground);
-    cursor: not-allowed;
-  }
-  
-  .cardCL.bookedCL:hover {
-    background-color: var(--error);
-    color: var(--primary-foreground);
-  }
-  
-  /* Text styles */
-  .text-centerCL {
-    text-align: center;
-  }
-  
-  .font-mediumCL {
-    font-weight: 500;
-  }
-  
-  .mt-2CL {
-    margin-top: 0.5rem;
-  }
-  
-  .mt-4CL {
-    margin-top: 1rem;
-  }
-  
-  .mt-6CL {
-    margin-top: 1.5rem;
-  }
-  
-  .p-4CL {
-    padding: 1rem;
-  }
-  
-  .rounded-lgCL {
-    border-radius: 0.5rem;
-  }
-  
-  /* Button styles */
-  .buttonCL {
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 0.25rem;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .buttonCL.primaryCL {
-    background-color: var(--primary);
-    color: var(--primary-foreground);
-  }
-  
-  .buttonCL.primaryCL:hover {
-    background-color: #004085;
-  }
-  
-  .buttonCL.secondaryCL {
-    background-color: #6c757d;
-    color: var(--primary-foreground);
-  }
-  
-  .buttonCL.secondaryCL:hover {
-    background-color: #5a6268;
-  }
-  
-  /* Modal styles */
-  .modalCL {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(0, 0, 0, 0.3);
-  }
-  
-  .modal-contentCL {
-    background: var(--card);
-    padding: 1rem;
-    border-radius: 0.5rem;
-    width: 300px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Input styles */
-  .inputCL {
-    width: 100%;
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 0.25rem;
-    margin-top: 0.25rem;
-  }
-  
+/* calendario.css */
+
+.cl-calendar-container {
+  background-color: #f9f9f9;
+  color: #333;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+.cl-header {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffffff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cl-header-content {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.cl-bar-image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #ddd;
+}
+
+.cl-bar-name {
+  font-size: 30px;
+  font-weight: bold;
+  color: #333;
+}
+
+.cl-reserve-button {
+  background-color: #007bff;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.cl-reserve-button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.cl-main-content {
+  display: flex;
+  gap: 20px;
+}
+
+.cl-calendar-section {
+  flex: 2;
+}
+
+.cl-info-section {
+  flex: 1;
+}
+
+.cl-calendar {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.cl-calendar-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.cl-nav-button {
+  background-color: #007bff;
+  color: #ffffff;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cl-nav-button:hover {
+  background-color: #0056b3;
+}
+
+.cl-current-month {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+}
+
+.cl-days-of-week {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-bottom: 10px;
+}
+
+.cl-day-name {
+  text-align: center;
+  font-weight: bold;
+  color: #666;
+}
+
+.cl-days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.cl-empty-day {
+  height: 50px;
+}
+
+.cl-day {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  font-size: 16px;
+  color: #333;
+}
+
+.cl-day:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.cl-available {
+  background-color: #e6ffe6; /* Color más suave para disponibilidad */
+}
+
+.cl-reserved {
+  background-color: #ffe6e6; /* Color más suave para reservas */
+}
+
+.cl-day-number {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.cl-info-box {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.cl-info-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #333;
+}
+
+.cl-info-text {
+  margin-bottom: 8px;
+  font-size: 16px;
+  color: #555;
+}
+
+.cl-footer {
+  margin-top: 24px;
+}
+
+.cl-footer-content {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.cl-status-item {
+  display: flex;
+  align-items: center;
+}
+
+.cl-status-indicator {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.cl-available-indicator {
+  background-color: #d4edda;
+}
+
+.cl-reserved-indicator {
+  background-color: #f8d7da;
+}
+
+.cl-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* Más oscuro para mayor contraste */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.cl-popup-content {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  position: relative;
+  width: 80%;
+  max-width: 500px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.cl-popup-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: none;
+  background: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.cl-back-button {
+  background-color: #007bff;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.cl-back-button:hover {
+  background-color: #0056b3;
+}
